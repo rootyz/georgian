@@ -84,7 +84,7 @@
       month: 'long'
     });
     return `${title('Study desk','Your personal workspace for the Georgian alphabet.',`<span class="date">${icon('cal',17)}${date}</span>`)}
-    <div class="desk-grid"><div class="desk-left">${hero()}<section class="arcade-section"><div class="section-head"><h2>Practice arcade</h2><a href="#games" class="text-link">All games</a></div><div class="game-grid">${Object.keys(games).map(gameCard).join('')}</div></section></div>
+    <div class="desk-grid"><div class="desk-left">${hero()}<section class="arcade-section"><div class="section-head"><h2>Practice arcade</h2><a href="#games" class="text-link">All games</a></div><div class="game-grid">${['shape','pairs','missing'].map(gameCard).join('')}</div></section></div>
     <aside>${progressBox()}${spotlightBox()}</aside></div>
     <section class="shelf"><div class="section-head"><h2>Alphabet shelf</h2><a href="#alphabet" class="text-link">Explore all 33</a></div><div class="shelf-grid">${ALPHABET.slice(0,8).map(glyphCard).join('')}</div></section>`;
   }
@@ -96,13 +96,13 @@
   function libraryResults() {
     const norm = v => v.toLowerCase().replace(/[’ʼ‘]/g, "'").trim();
     const term = norm(search);
-    const matches = ALPHABET.filter(c => (filter === 'All' || (filter === 'Studied' ? S.status(c.glyph) !== 'New' : filter === c.category + 's')) && [c.glyph, c.latin, c.name, c.word, c.reading, c.meaning].some(x => norm(x).includes(term)));
+    const matches = ALPHABET.filter(c => (filter === 'All' || (filter === 'Studied' ? S.status(c.glyph) !== 'New' : filter === c.category + 's')) && [c.glyph, c.latin, c.name, c.word, c.reading, c.meaning, c.originalExample?.word || '', c.originalExample?.reading || '', c.originalExample?.meaning || ''].some(x => norm(x).includes(term)));
     $('#result-count').textContent = `${matches.length} ${matches.length===1?'letter':'letters'}`;
     $('#letters').innerHTML = matches.length ? matches.map(glyphCard).join('') : `<div class="empty"><h3>${filter==='Studied'&&!Object.keys(S.state.cards).length?'Your studied letters will appear here.':'No matching letters.'}</h3><p>${filter==='Studied'?'Rate a flashcard to add it to your studied set.':'Try a different spelling or change the filter.'}</p><button class="secondary" data-act="reset-search">Show all letters</button></div>`;
   }
 
   function gamesPage() {
-    return `${title('Practice arcade','Train letter recognition, spelling, and reading speed.')}<div class="game-grid big-games">${Object.keys(games).map(gameCard).join('')}</div>`;
+    return `${title('Practice arcade','Practice letter shapes, word meanings, spelling, and speed.')}<div class="game-grid big-games">${Object.keys(games).map(gameCard).join('')}</div>`;
   }
 
   function weekly() {
@@ -138,7 +138,7 @@
     const c = S.byGlyph.get(q[session.index]),
       r = session.revealed,
       status = S.status(c.glyph);
-    return `<div class="action-heading"><a class="text-link" href="#desk">${icon('back',16)}Study desk</a><span>Daily flashcards</span></div><section class="question-panel review"><div class="panel-top"><span class="kicker">${icon('cards',17)}Card ${session.index+1} of ${q.length}</span><span class="state"><i class="status-dot ${status.toLowerCase()}"></i>${status}</span></div><div class="session-meter"><i style="width:${100*session.index/q.length}%"></i></div><div class="question-body"><p class="prompt">${r?'Read it aloud, then rate your recall.':'What sound does this letter make?'}</p><div class="flash-letter grid-paper" lang="ka">${c.glyph}</div>${r?`<div class="answer-title"><h2>${esc(c.name)} <span>· ${esc(c.latin)}</span></h2>${soundButton(c.glyph)}</div><div class="answer-meta">${c.category} <i>·</i> /${esc(c.ipa)}/</div><p class="cue">${esc(c.tip)}</p>${wordExample(c)}${memoryCue(c)}${SoundLab.cardLink(c.glyph)}<fieldset class="ratings"><legend>How well did you remember?</legend>${['again','hard','good','easy'].map((gr,i)=>`<button class="grade ${gr}" data-grade="${gr}" title="Shortcut ${i+1}"><strong>${gr[0].toUpperCase()+gr.slice(1)}</strong><small>${S.delayLabel(S.interval(c.glyph,gr))}</small></button>`).join('')}</fieldset>`:`${memoryCue(c,true)}<button class="primary" data-act="reveal">Reveal answer</button><span class="keyhint">Press <kbd>Space</kbd> to reveal</span>`}</div></section>`;
+    return `<div class="action-heading"><a class="text-link" href="#desk">${icon('back',16)}Study desk</a><span>Daily flashcards</span></div><section class="question-panel review"><div class="panel-top"><span class="kicker">${icon('cards',17)}Card ${session.index+1} of ${q.length}</span><span class="state"><i class="status-dot ${status.toLowerCase()}"></i>${status}</span></div><div class="session-meter"><i style="width:${100*session.index/q.length}%"></i></div><div class="question-body"><p class="prompt">${r?'Read it aloud, then rate your recall.':'What sound does this letter make?'}</p><div class="flash-letter grid-paper" lang="ka">${c.glyph}</div>${r?`<div class="answer-title"><h2>${esc(c.name)} <span>· ${esc(c.latin)}</span></h2>${soundButton(c.glyph)}</div><div class="answer-meta">${c.category} <i>·</i> /${esc(c.ipa)}/</div><p class="cue">${esc(c.tip)}</p>${memoryCue(c)}${wordExample(c)}${SoundLab.cardLink(c.glyph)}<fieldset class="ratings"><legend>How well did you remember?</legend>${['again','hard','good','easy'].map((gr,i)=>`<button class="grade ${gr}" data-grade="${gr}" title="Shortcut ${i+1}"><strong>${gr[0].toUpperCase()+gr.slice(1)}</strong><small>${S.delayLabel(S.interval(c.glyph,gr))}</small></button>`).join('')}</fieldset>`:`${memoryCue(c,true)}<button class="primary" data-act="reveal">Reveal answer</button><span class="keyhint">Press <kbd>Space</kbd> to reveal</span>`}</div></section>`;
   }
 
   function view() {
@@ -184,13 +184,18 @@
     }
   }
 
-  function play(g, wholeWord = false) {
-    if (!S.byGlyph.has(g)) return;
+  function play(g, kind = 'letter') {
+    const card = S.byGlyph.get(g);
+    if (!card) return;
     audio?.pause();
-    const folder = wholeWord ? './audio/words' : './audio';
-    audio = new Audio(`${folder}/${number(idx(g) + 1)}.mp3`);
-    audio.play().catch(e => {
-      if (e.name !== 'AbortError') toast('Audio could not play. Check the device audio output and try again.');
+    const human = kind === 'word';
+    const source = human ? SpeakerAudio.urlFor(card.recording) :
+      (kind === 'original' ? './audio/words/' : './audio/') + number(idx(g) + 1) + '.mp3';
+    const clip = new Audio(source);
+    audio = clip;
+    clip.play().catch(error => {
+      if (clip !== audio || error.name === 'AbortError') return;
+      toast(human ? 'Recording unavailable. Try online or open the recording source on the alphabet card.' : 'Audio could not play. Check your audio output and try again.');
     });
   }
 
@@ -210,7 +215,7 @@
     const c = S.byGlyph.get(g);
     if (!c) return;
     selectedLetter = g;
-    openDialog(`<div class="modal-head"><span class="kicker">Letter ${number(idx(g)+1)} / 33</span>${closeBtn}</div><div class="detail-letter grid-paper" lang="ka">${g}</div><div class="detail-head"><div><h2>${esc(c.name)}</h2><p>${c.category} · ${esc(c.latin)} · /${esc(c.ipa)}/</p></div>${soundButton(g)}</div><p class="cue">${esc(c.tip)}</p>${wordExample(c)}${memoryCue(c)}${SoundLab.cardLink(g)}<div class="detail-bottom"><button class="secondary" data-act="trace">${icon('edit',16)}Trace letter</button><div><button class="square" data-shift="-1" aria-label="Previous letter">${icon('back',17)}</button><button class="square" data-shift="1" aria-label="Next letter">${icon('next',17)}</button></div></div>`);
+    openDialog(`<div class="modal-head"><span class="kicker">Letter ${number(idx(g)+1)} / 33</span>${closeBtn}</div><div class="detail-letter grid-paper" lang="ka">${g}</div><div class="detail-head"><div><h2>${esc(c.name)}</h2><p>${c.category} · ${esc(c.latin)} · /${esc(c.ipa)}/</p></div>${soundButton(g)}</div><p class="cue">${esc(c.tip)}</p>${memoryCue(c)}${wordExample(c)}${SoundLab.cardLink(g)}<div class="detail-bottom"><button class="secondary" data-act="trace">${icon('edit',16)}Trace letter</button><div><button class="square" data-shift="-1" aria-label="Previous letter">${icon('back',17)}</button><button class="square" data-shift="1" aria-label="Next letter">${icon('next',17)}</button></div></div>`);
   }
 
   function trace() {
@@ -254,7 +259,41 @@
 
   function settings() {
     selectedLetter = null;
-    openDialog(`<div class="modal-head"><span class="kicker">Preferences</span>${closeBtn}</div><h2>Study settings</h2><div class="setting-row"><div><label for="goal">New letters per day</label><p>Due reviews are always included.</p></div><select id="goal">${[3,5,8,12].map(n=>`<option value="${n}" ${S.state.goal===n?'selected':''}>${n}</option>`).join('')}</select></div><div class="setting-block"><h3>Progress backup</h3><p>Progress stays in this browser. Export a copy to move it to another device.</p><div class="button-row"><button class="secondary small" data-act="export">${icon('download',16)}Export</button><button class="secondary small" data-act="import">Import backup</button><input hidden type="file" id="backup" accept=".json,application/json"></div></div><div class="setting-block"><h3>Offline & installation</h3><p id="offline-status">${offlineReady?'Offline practice is ready on this device.':'Open the app online over HTTPS and leave it open briefly to save the offline lessons.'}</p>${installPrompt?'<button class="secondary small" data-act="install">Install Anbani</button>':'<p>Use your browser’s install option or Add to Home Screen where available.</p>'}</div><details><summary>About the alphabet & audio</summary><p>Mkhedruli has 33 letters. An apostrophe in the Latin spelling marks an ejective sound. IPA appears between slashes.</p><p>Letter clips come from the <a href="https://github.com/noBloodOnTheLeaves/alphabet_learner" target="_blank" rel="noopener">Alphabet Learner project</a>. <a href="./audio/CREDITS.txt" target="_blank" rel="noopener">Letter credits</a>. The whole-word clips use a synthesized Georgian voice. <a href="./audio/words/CREDITS.txt" target="_blank" rel="noopener">Whole-word audio credits</a></p></details>`);
+    openDialog(`<div class="modal-head"><span class="kicker">Preferences</span>${closeBtn}</div><h2>Study settings</h2><div class="setting-row"><div><label for="goal">New letters per day</label><p>Due reviews are always included.</p></div><select id="goal">${[3,5,8,12].map(n=>`<option value="${n}" ${S.state.goal===n?'selected':''}>${n}</option>`).join('')}</select></div><div class="setting-block"><h3>Progress backup</h3><p>Progress stays in this browser. Export a copy to move it to another device.</p><div class="button-row"><button class="secondary small" data-act="export">${icon('download',16)}Export</button><button class="secondary small" data-act="import">Import backup</button><input hidden type="file" id="backup" accept=".json,application/json"></div></div><div class="setting-block"><h3>Speaker recordings</h3><p>Hear all 33 main examples read aloud. Save the recordings while online to practice offline.</p><button class="secondary small" data-act="save-speakers">${icon('download',16)}Save speaker audio</button><p id="speaker-state" role="status"></p></div><div class="setting-block"><h3>Offline & installation</h3><p id="offline-status">${offlineReady?'Offline lessons and letter audio are ready.':'Open the app online over HTTPS and leave it open briefly to save the offline lessons.'}</p>${installPrompt?'<button class="secondary small" data-act="install">Install Anbani</button>':'<p>Use your browser’s install option or Add to Home Screen where available.</p>'}</div><details><summary>About the alphabet & audio</summary><p>Mkhedruli has 33 letters. An apostrophe in the Latin spelling marks an ejective sound. IPA appears between slashes.</p><p>Letter clips come from the <a href="https://github.com/noBloodOnTheLeaves/alphabet_learner" target="_blank" rel="noopener">Alphabet Learner project</a>. <a href="./audio/CREDITS.txt" target="_blank" rel="noopener">Letter credits</a>. The main examples use human recordings from Wikimedia Commons. <a href="./audio/SPEAKERS.txt" target="_blank" rel="noopener">Speakers and licenses</a>. Additional examples have a separately labeled <a href="./audio/words/CREDITS.txt" target="_blank" rel="noopener">synthesized guide</a>.</p></details>`);
+    showSpeakerState();
+  }
+
+  const voiceScope = new URL('./', location.href).href;
+  let savingSpeakers = false, speakerMessage = '';
+  function updateSpeakerState(message) {
+    speakerMessage = message;
+    const label = $('#speaker-state'), button = $('[data-act="save-speakers"]');
+    if (label) label.textContent = message;
+    if (button) button.disabled = savingSpeakers || !('caches' in globalThis) || !['http:', 'https:'].includes(location.protocol);
+  }
+  async function showSpeakerState() {
+    if (!('caches' in globalThis) || !['http:', 'https:'].includes(location.protocol)) {
+      updateSpeakerState('Open the hosted app over HTTPS or localhost to save recordings.');
+      return;
+    }
+    if (savingSpeakers) { updateSpeakerState(speakerMessage); return; }
+    try {
+      const saved = await SpeakerAudio.count(voiceScope, SpeakerAudio.prefersMP3());
+      if (!savingSpeakers) updateSpeakerState(`${saved} of 33 recordings saved.`);
+    } catch { updateSpeakerState('Audio storage is unavailable in this browser.'); }
+  }
+  async function saveSpeakers() {
+    if (savingSpeakers) return;
+    savingSpeakers = true;
+    updateSpeakerState('Saving recordings…');
+    let finalMessage;
+    try {
+      const count = await SpeakerAudio.saveAll(voiceScope, n => updateSpeakerState(`Checked ${n} of 33 recordings…`));
+      finalMessage = count === 33 ? 'All 33 recordings are ready for offline listening.' :
+        `${count} of 33 saved. Check your connection and try again to save the rest.`;
+    } catch { finalMessage = 'Recordings could not be saved. Check your connection and available storage.'; }
+    savingSpeakers = false;
+    updateSpeakerState(finalMessage);
   }
 
   function exportData() {
@@ -296,13 +335,13 @@
       SoundLab.click(el, play);
       return;
     }
-    if (ds.gameAct !== undefined || ds.gameAnswer !== undefined || ds.gameTile !== undefined || ds.gameRemove !== undefined) {
-      if (ds.gameAct === 'next') audio?.pause();
+    if (ds.pairIndex !== undefined || ds.gameAct !== undefined || ds.gameAnswer !== undefined || ds.gameTile !== undefined || ds.gameRemove !== undefined) {
+      if (['next','pairs-next','replay'].includes(ds.gameAct)) audio?.pause();
       Arcade.click(el);
       return;
     }
-    if (ds.sound || ds.wordSound) {
-      play(ds.sound || ds.wordSound, Boolean(ds.wordSound));
+    if (ds.sound || ds.wordSound || ds.originalSound) {
+      play(ds.sound || ds.wordSound || ds.originalSound, ds.wordSound ? 'word' : ds.originalSound ? 'original' : 'letter');
       return;
     }
     if (ds.letter) {
@@ -334,6 +373,9 @@
       return;
     }
     switch (ds.act) {
+      case 'save-speakers':
+        await saveSpeakers();
+        break;
       case 'close':
         dialog.close();
         break;
@@ -467,7 +509,7 @@
   if ('serviceWorker' in navigator && ['https:', 'http:'].includes(location.protocol)) {
     navigator.serviceWorker.register('./sw.js').then(() => navigator.serviceWorker.ready).then(() => {
       offlineReady = true;
-      if ($('#offline-status')) $('#offline-status').textContent = 'Offline practice is ready on this device.';
+      if ($('#offline-status')) $('#offline-status').textContent = 'Offline lessons and letter audio are ready.';
     }).catch(() => {});
   }
 })();

@@ -61,6 +61,10 @@
         <section class="lab-detail"><div class="box lab-overview"><span class="kicker">${icon('sounds',16)} Pronunciation practice</span>
           <h2>${esc(lesson.title)}</h2><p>${esc(lesson.summary)}</p>
           <div class="lab-samples" style="--samples:${lesson.letters.length}">${lesson.letters.map(compare).join('')}</div>
+          ${lesson.id === 'soft-palate' ? `<div class="lab-minimal"><h3>Compare the two words</h3><p>Both words end in არი. Listen for the puff or pop at the beginning.</p>${['ქ','კ'].map(g => {
+            const example = Study.byGlyph.get(g).originalExample;
+            return `<div class="lab-word"><div><b lang="ka">${example.word}</b><span>${esc(example.meaning)}</span></div><a class="native-sample" href="${esc(example.listeningPage)}" target="_blank" rel="noopener">Hear on Forvo ↗</a></div>`;
+          }).join('')}</div>` : ''}
           <div class="lab-instructions"><div><h3>Tongue & lips</h3><p>${esc(lesson.placement)}</p></div>
             <div><h3>Breath & throat</h3><p>${esc(lesson.airflow)}</p></div>
             <div><h3>Try it aloud</h3><p>${esc(lesson.practice)}</p></div></div></div>

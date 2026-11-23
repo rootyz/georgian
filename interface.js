@@ -33,6 +33,12 @@
   const icon = (key, size = 20) => `<svg class="icon" aria-hidden="true" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${paths[key]||''}</svg>`;
   const menu = [['desk', 'Study desk'], ['alphabet', 'Alphabet'], ['sounds', 'Sound lab'], ['games', 'Games'], ['progress', 'Progress']];
   const games = {
+    shape: {name:'Shape hunt', desc:'Find the glyph from its visual memory cue.',icon:'search',tag:'Shape recall',art:'shape',color:'peach',
+      instructions:'Read the letter-shape clue and find the Georgian glyph it describes. After you choose, compare your answer with the full mnemonic.'},
+    missing: {name:'Missing letter', desc:'Restore one missing letter in a real word.',icon:'edit',tag:'Word recall',art:'missing',color:'sky',
+      instructions:'One letter is missing from a Georgian word. Use its meaning and Latin spelling to fill the gap.'},
+    pairs: {name:'Word pairs', desc:'Flip cards to match words with their meanings.',icon:'cards',tag:'Memory',art:'pairs',color:'rose',
+      instructions:'Match four Georgian words to their four English meanings in eight moves. Turn over two cards per move. Matching cards stay face up.'},
     match: {
       name: 'Letter match',
       desc: 'Pair a Georgian letter with its sound.',
@@ -76,24 +82,38 @@
   const soundButton = g => `<button class="sound square" data-sound="${g}" aria-label="Hear ${esc(Study.byGlyph.get(g).name)} pronounced" title="Hear letter pronunciation">${icon('sound',18)}</button>`;
 
   function wordSoundButton(card) {
+    if (card.original) return `<button type="button" class="word-sound" data-original-sound="${card.glyph}" aria-label="Play synthesized guide for ${esc(card.word)}">${icon('sound', 16)}Synthesized guide</button>`;
     return `<button type="button" class="word-sound" data-word-sound="${card.glyph}" aria-label="Hear the whole word ${esc(card.word)}, ${esc(card.meaning)}">${icon('sound', 16)}Hear word</button>`;
   }
 
   function memoryCue(card, hint = false) {
     const cue = MNEMONICS[card.glyph];
     const picture = mnemonicPicture(card.glyph);
-    const scene = `<div class="memory-scene">${picture}<div><h3>${esc(cue.anchor)}</h3><p>${esc(cue.story)}</p></div></div>`;
-    if (hint) return `<details class="memory-hint"><summary>Show a memory hint</summary>${scene}</details>`;
-    return `<section class="memory-cue"><span class="kicker">${icon('star', 13)} Memory cue</span>${scene}</section>`;
+    if (hint) {
+      return `<details class="memory-hint"><summary>Show a letter-shape hint</summary><div class="memory-scene">${picture}<h3>${esc(cue.letterAnchor)}</h3></div></details>`;
+    }
+    return `<section class="memory-cue letter-memory"><span class="kicker">${icon('star', 13)} Letter mnemonic</span>
+      <div class="memory-scene">${picture}<div><h3>${esc(cue.letterAnchor)}</h3><p>${esc(cue.letterCue)}</p></div></div></section>`;
   }
 
-  function wordExample(c) {
+  function wordMnemonic(card) {
+    const cue = card.wordMemory;
+    return `<div class="word-mnemonic"><span class="kicker">Word mnemonic</span><strong>${esc(cue.wordAnchor)}</strong><p>${esc(cue.wordCue)}</p></div>`;
+  }
+
+  function exampleBlock(c) {
     const tiles = [...c.word].map(glyph => {
       const letter = Study.byGlyph.get(glyph);
       return `<button class="decode-tile" data-sound="${glyph}" title="Hear ${esc(letter.name)}" aria-label="Hear ${esc(letter.name)}, ${esc(letter.latin)}"><strong lang="ka">${glyph}</strong><small>${esc(letter.latin)}</small></button>`;
     }).join('');
-    const nativeLink = c.word === 'მთა' ? '<a class="native-sample" href="https://commons.wikimedia.org/wiki/File:Ka-მთა-Nicodene-mom.ogg" target="_blank" rel="noopener">Native speaker on Wikimedia</a>' : '';
-    return `<div class="example"><span class="example-img" aria-hidden="true">${emoji[idx(c.glyph)]||icon('alphabet',30)}</span><div><span class="kicker">Example word</span><div class="example-word"><strong lang="ka"><b>${c.word[0]}</b>${c.word.slice(1)}</strong>${wordSoundButton(c)}</div><span class="example-trans">${esc(c.reading)} <i>·</i> ${esc(c.meaning)}</span><details class="decode"><summary>Read letter by letter</summary><div class="decode-row">${tiles}</div></details>${nativeLink}</div></div>`;
+    const link = c.original ? c.listeningPage : c.recording.source;
+    const source = link ? `<a class="native-sample" href="${esc(link)}" target="_blank" rel="noopener">${c.original ? 'Listen to a speaker on Forvo ↗' : 'Recording on Wikimedia Commons ↗'}</a>` : '';
+    const picture = c.wordMemory.picture || emoji[idx(c.glyph)] || icon('alphabet',30);
+    return `<div class="example"><span class="example-img" aria-hidden="true">${picture}</span><div><span class="kicker">${c.original ? 'Additional word' : 'Example word · Recorded speaker'}</span><div class="example-word"><strong lang="ka"><b>${c.word[0]}</b>${c.word.slice(1)}</strong>${wordSoundButton(c)}</div><span class="example-trans">${esc(c.reading)} <i>·</i> ${esc(c.meaning)}</span><details class="decode"><summary>Read letter by letter</summary><div class="decode-row">${tiles}</div></details>${wordMnemonic(c)}${source}</div></div>`;
+  }
+  function wordExample(c) {
+    const other = c.originalExample;
+    return exampleBlock(c) + (other ? `<details class="extra-word"><summary>Another word · <span lang="ka">${other.word}</span> · ${esc(other.meaning)}</summary>${exampleBlock(other)}</details>` : '');
   }
   const title = (heading, sub, side = '') => `<div class="page-title"><div><h1>${heading}</h1><p>${sub}</p></div>${side}</div>`;
   const glyphCard = c => `<button class="glyph-tile" data-letter="${c.glyph}" aria-label="Explore ${esc(c.name)}, ${esc(c.latin)}"><span class="tile-top"><small>${number(idx(c.glyph)+1)}</small><i class="status-dot ${Study.status(c.glyph).toLowerCase()}" title="${Study.status(c.glyph)}"></i></span><b lang="ka">${c.glyph}</b><span>${esc(c.latin)}</span></button>`;

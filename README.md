@@ -7,7 +7,7 @@ Anbani is an offline-capable Georgian alphabet trainer. Start at **Study desk �
 1. Unzip the download. Create a GitHub repository or open the repository that will host the app.
 2. Upload the **contents** of the unzipped folder to the root of your publishing branch. Keep `index.html`, `sw.js`, and `manifest.webmanifest` together. Preserve the `art`, `audio`, `fonts`, and `icons` folders.
 3. In **Settings → Pages**, choose **Deploy from a branch**. Select your uploaded branch, typically `main`, and the `/(root)` folder. Click **Save**.
-4. Open the HTTPS address GitHub shows for the site. On the first online visit, open the gear and wait for **Offline practice is ready on this device**. You can then study and play the audio offline.
+4. Open the HTTPS address GitHub shows for the site. On the first online visit, open the gear and wait for **Offline lessons and letter audio are ready**. Choose **Save speaker audio** and wait for **All 33 recordings are ready for offline listening** before disconnecting. You can retry a partial download.
 
 The app uses relative paths and works at a repository URL such as `https://YOUR-NAME.github.io/YOUR-REPOSITORY/`. It is ready to serve as uploaded. [GitHub Pages publishing guide](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 
@@ -16,12 +16,13 @@ For an existing Pages installation, upload the updated files to the same folder.
 ## Study
 
 - Reveal each flashcard after trying the sound aloud. Tap **Hear word** beside the Georgian example to hear the complete word. Try it aloud, then use **Read letter by letter** to practice a difficult sound. Whole-word playback also works in the alphabet library and Word builder.
-- Each letter has a visual memory cue tied to its example word. Choose **Show a memory hint** before revealing a flashcard or find the full cue on the answer side and in the library. Three illustrated cues use a peach hook, a left ear, and an imagined building in Batumi.
+- Each letter has two memory cues. The **Letter mnemonic** links its shape to its sound, such as a hook for ა, a left ear for ე, or a curved building in Batumi for ი. The **Word mnemonic** connects the example’s pronunciation to its meaning. Open **Show a letter-shape hint** before revealing a card if you need a clue.
 - Open **Sound lab** for seven pronunciation lessons. Compare letter recordings, listen to whole example words, and follow the tongue, lips, breath, and throat instructions. Select **Start listening drill** for a five-question sound identification exercise.
 - Rate your recall with **Again**, **Hard**, **Good**, or **Easy**. The interval printed on each button is when the card will return. A new card rated Again returns in one minute, Hard in ten minutes, Good in one day, and Easy in four days. Open another session from the desk when a review is due.
 - Later intervals grow with successful recall. A letter is marked **Learned** when its interval reaches 21 days. The progress ring counts every letter you have studied at least once.
 - The desk starts with five new letters per local calendar day, plus due reviews. Use the gear to choose three, five, eight, or twelve new letters. In a review, press **Space** to reveal and **1–4** to rate.
 - The **Alphabet** tab lets you search all 33 letters by glyph, name, sound, or example word. Open a letter and choose **Trace letter** for freehand practice.
+- **Shape hunt** asks you to identify a letter from its visual mnemonic. **Missing letter** has you restore a gap in a Georgian word. **Word pairs** challenges you to match four Georgian words with their English meanings in eight moves.
 - **Letter match** tests recognition in eight questions. **Word builder** gives five words to spell from tiles. **Speed round** gives 45 seconds to identify as many letters as possible. Games track their own scores. Card ratings control spaced repetition.
 
 ## Install and save progress
@@ -42,6 +43,6 @@ From the folder containing `index.html`, run `python3 -m http.server 8000` and o
 - Latin spellings use the [Georgian national romanization system](https://assets.publishing.service.gov.uk/media/67990616636f8db3c2707143/ROMANIZATION_OF_GEORGIAN_Jan_25.pdf). Apostrophes distinguish ejective consonants, as in *k* and *k'*.
 - Pronunciation references include Ryan Shosted and Vakhtang Chikovani’s [Standard Georgian](https://doi.org/10.1017/S0025100306002659) and Tamar Makharoblidze’s [Basic Georgian](https://eprints.iliauni.edu.ge/3035/1/Basic-Georgian%202%20bolo%20versia.pdf).
 - The 33 letter recordings come from [Alphabet Learner](https://github.com/noBloodOnTheLeaves/alphabet_learner). Attribution and the Apache 2.0 license are in `audio/`. Each clip plays an individual letter sound.
-- The 33 whole words use a synthesized Georgian voice. Their pronunciations and credits are in `audio/words/`. Both sets of audio are bundled for offline use.
+- All 33 main examples have human recordings from Wikimedia Commons. A recording downloads the first time you play it on the installed site. **Settings → Save speaker audio** saves the entire set. Titles, authors, licenses, and source pages are in `audio/SPEAKERS.txt`. Nineteen cards also keep an earlier example under **Another word** with its original word mnemonic and a labeled synthesized guide. Where available, a Forvo link opens a speaker’s reading of the additional word.
 - The Georgian glyphs use a subset of DejaVu Sans. The font license is in `fonts/LICENSE.txt`.
 

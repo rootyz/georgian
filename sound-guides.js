@@ -11,7 +11,7 @@ globalThis.SOUND_GUIDES = [
     ],
     placement: 'Close both lips gently. Let your tongue rest low and keep your jaw loose.',
     airflow: 'For ფ, open your lips on an easy breath. For პ, briefly catch your breath, as in the middle of “uh-oh”. Part your lips while the catch is still there, then let the vowel begin.',
-    practice: 'Hold your palm near your mouth. Say ფუ, then პუ. Feel which one sends more breath toward your hand. Try the same beginnings in ფული (money) and პური (bread).'
+    practice: 'Hold your palm near your mouth. Say ფუ, then პუ. Feel which one sends more breath toward your hand. Try the same beginnings in ფუტკარი (bee) and პური (bread).'
   },
   {
     id: 'teeth',
@@ -61,7 +61,7 @@ globalThis.SOUND_GUIDES = [
     ],
     placement: 'Lift the blade of your tongue a little behind the ridge above your upper teeth. Briefly close the gap, then ease it open into the sh shape.',
     airflow: 'For ჩ, let breath pass through the opening. For ჭ, briefly catch your breath and release into sh. For ჯ, let the vocal folds vibrate as the closure opens.',
-    practice: 'Say ჩა, ჭა, ჯა on the same vowel. Then listen for those three beginnings in ჩაი (tea), ჭიქა (drinking glass), and ჯემი (jam).'
+    practice: 'Say ჩა, ჭა, ჯა on the same vowel. Then listen for those three beginnings in ჩიტი (bird), ჭეშმარიტი (true), and ჯანჯაფილი (ginger).'
   },
   {
     id: 'friction',
@@ -86,6 +86,6 @@ globalThis.SOUND_GUIDES = [
     ],
     placement: 'Start with the back of your tongue in the k position. For ყ, draw it slightly farther back toward the uvula, the small part hanging at the back of the soft palate.',
     airflow: 'Use the same brief catch as in კ. Release gently into the vowel. Speakers vary in how much friction you hear with ყ.',
-    practice: 'Say კა and ყა slowly with a relaxed jaw. Then alternate კარი (door) and ყავა (coffee), listening to where each word begins.'
+    practice: 'Say კა and ყა slowly with a relaxed jaw. Then alternate კვერცხი (egg) and ყავა (coffee), listening to where each word begins.'
   }
 ];

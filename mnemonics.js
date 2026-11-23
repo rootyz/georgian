@@ -1,38 +1,204 @@
-// Original visual associations for the example words. These are imaginative memory aids.
+// These original, imaginative cues pair a glyph with its sound and a separate word with its meaning.
+// English words in the scenes are memory prompts. The recordings model Georgian pronunciation.
 globalThis.MNEMONICS = {
-  "ა": { anchor: "A peach hook", story: "Catch a peach by its stem on the open tip of ა. Let it swing as you say ah." },
-  "ბ": { anchor: "A cherry on its stem", story: "The closed oval of ბ is a cherry. Pick it by the bent stem sticking out of the top." },
-  "გ": { anchor: "A stethoscope", story: "Put the little curl of გ in your ear. Press its big round end against your chest to hear your heart." },
-  "დ": { anchor: "A mother cradling a baby", story: "Tuck a swaddled baby into the right-hand loop of დ. The long curve on the left is the mother’s arm." },
-  "ე": { anchor: "A left ear", story: "Imagine ე as your left ear. A tongue leans in and whispers the Georgian word ენა." },
-  "ვ": { anchor: "An apple peel", story: "Peel an apple in one long strip. Let it fall into the two round bends of ვ, like a handwritten 3." },
-  "ზ": { anchor: "A bell on a ring", story: "Hang the larger oval of ზ from its tiny top ring. Give the bell a shake and hear it buzz, zzz." },
-  "თ": { anchor: "A honey dipper", story: "Dip the closed loop of თ into honey. A sticky strand arches over to the right and drips down." },
-  "ი": { anchor: "A building in Batumi", story: "Picture a seaside building in Batumi shaped like the arch of ი. Violets grow between its two feet." },
-  "კ": { anchor: "A door latch", story: "Slip a finger into the open lower curve of კ. Lift its little sideways latch and the door pops open." },
-  "ლ": { anchor: "A lion’s paw", story: "Count three toe humps across the top of ლ. The long sweep underneath is the mark the lion’s paw left in the sand." },
-  "მ": { anchor: "A mountain tunnel", story: "Walk into the lower loop of მ as if it were a tunnel. The tall stroke curling over it is the mountain ridge." },
-  "ნ": { anchor: "A boat at the jetty", story: "The flat top of ნ is a jetty. An oval boat bobs against the post just below it." },
-  "ო": { anchor: "Two hilltops", story: "Run your finger across the two humps of ო. Count them in Georgian as you go: ერთი, ორი — one, two." },
-  "პ": { anchor: "A baker’s oven", story: "Slide bread into the open round belly of პ. Watch a wisp of steam curl out at the very top." },
-  "ჟ": { anchor: "A berry picker", story: "Snag a raspberry with the little inward hook of ჟ. Drop it into the curved scoop at the bottom." },
-  "რ": { anchor: "A road on a map", story: "Picture the two humps of რ as hills on a map. Trace the road that curves up and over the left hill." },
-  "ს": { anchor: "A house drainpipe", story: "Follow the straight side of ს down the wall of a house. A puddle collects in the upturned foot of the pipe." },
-  "ტ": { anchor: "A pier in a lake", story: "Look down at ტ from above. Its oval is a lake, and its straight pier sticks out into the water." },
-  "უ": { anchor: "A neighborhood street", story: "The top of უ makes two little rooftops. The street below bends in a U around the neighborhood." },
-  "ფ": { anchor: "A coin purse", story: "Roll the round coin on the left of ფ over the middle hump. Your money drops into the open purse below." },
-  "ქ": { anchor: "A windsock", story: "Use the tall upright of ქ as a pole. A gust of wind blows the short curved windsock out to the left." },
-  "ღ": { anchor: "A night owl", story: "Put an owl’s eyes under the twin brows of ღ. At night it perches on the little forked branch below." },
-  "ყ": { anchor: "A coffee maker", story: "Fit a filter into the top cup of ყ. Coffee drips into the curved pot underneath." },
-  "შ": { anchor: "A sleeping black cat", story: "Find two tiny ears at the top of შ. The big round loop below is a black cat curled up asleep." },
-  "ჩ": { anchor: "A steaming teapot", story: "Grip the lower arch of ჩ like a teapot handle. A curl of steam rises from the tea to make the little hook above." },
-  "ც": { anchor: "A cloud in the sky", story: "Frame a patch of sky with the tall curve on the left of ც. Imagine a cloud puffing out the two bumps on the right." },
-  "ძ": { anchor: "A dog on a lead", story: "Clip a lead to your dog’s round collar. The collar forms the loop of ძ and the lead goes straight up on the right." },
-  "წ": { anchor: "A water tap", story: "Turn the double-curved tap at the top of წ. The loop below is a bucket filling with water." },
-  "ჭ": { anchor: "A straw in a glass", story: "Sip from the round drinking glass at the bottom of ჭ. Its tall straw has a little curly loop sticking out to the left." },
-  "ხ": { anchor: "A hollow tree", story: "The straight left edge of ხ is a tree trunk. Look for a squirrel in the round hollow at its base." },
-  "ჯ": { anchor: "A jam spoon", story: "The diagonal slash across ჯ is the rim of a tilted jam jar. Scrape it with the curled end of the spoon." },
-  "ჰ": { anchor: "A ribbon in the air", story: "Blow air under a hanging ribbon. It flutters into the three stacked bends of ჰ as you breathe out hhh." },
+  "ა": {
+    letterAnchor: "A hook",
+    letterCue: "Trace the open curve of ა like a hook. Imagine it catching your sleeve and say ah as it tugs.",
+    wordAnchor: "Tammy’s peach",
+    wordCue: "Picture Tammy catching a peach. Call out “Ah, Tammy!” to recall ა–ტა–მი (a–t’a–mi), with a little pop on the Georgian t’."
+  },
+  "ბ": {
+    letterAnchor: "A bubble wand",
+    letterCue: "The bent handle of ბ sits above one big round bubble. Bubble gives you the sound b.",
+    wordAnchor: "Cherries in Bali",
+    wordCue: "Imagine a cherry tree growing on the beach in Bali. Pick one cherry on ბა and another on ლი to recall ბალი (bali)."
+  },
+  "გ": {
+    letterAnchor: "A goose with a curled neck",
+    letterCue: "The lower loop of გ is a goose floating on the water. Its neck curls above its round body. Goose starts with a hard g.",
+    wordAnchor: "A ghoul with a beating heart",
+    wordCue: "Put a hand on a ghoul’s enormous beating heart. Ghoul brings გულ (gul) to mind. One more beat adds ი for გული (guli)."
+  },
+  "დ": {
+    letterAnchor: "A dancer dipping",
+    letterCue: "See the right-hand loop of დ as a dancer’s head. Follow the long left curve as the dancer dips. Dancer and dip both begin with d.",
+    wordAnchor: "Mother’s rocking song",
+    wordCue: "A mother rocks her baby to the left on დე (de) and to the right on და (da). Her two-beat song spells დედა (deda)."
+  },
+  "ე": {
+    letterAnchor: "A left ear",
+    letterCue: "Picture ე as a left ear with a long outer rim and two tips pointing inward. Hear the short e in bed.",
+    wordAnchor: "The tongue at the dentist",
+    wordCue: "A dentist asks to see your tongue. Stick it out on ე (e), then say ნა (na) as you pull it back. The two beats make ენა (ena)."
+  },
+  "ვ": {
+    letterAnchor: "A curling vine",
+    letterCue: "Trace the two rounded bends of ვ as a vine winding around a post. Vine starts with v.",
+    wordAnchor: "An apple for Ashley",
+    wordCue: "Give Ashley an apple with a big V carved into its skin. The V and Ashley together cue ვ–აშლი (v–ashli), ვაშლი."
+  },
+  "ზ": {
+    letterAnchor: "A buzzing figure eight",
+    letterCue: "Fly a bee around the small top loop of ზ and back around the larger bottom loop. Follow both loops with a buzzing zzz.",
+    wordAnchor: "The czar’s bell",
+    wordCue: "A czar rings a bell to announce his arrival. Czar brings ზარ (zar) to mind. Add ი as the bell rings out to get ზარი (zari)."
+  },
+  "თ": {
+    letterAnchor: "A looped ribbon",
+    letterCue: "Imagine the closed left loop of თ as a ribbon. A puff blows its loose end into the arch on the right. Use the airy t in top.",
+    wordAnchor: "A jar of honey",
+    wordCue: "Tap a honey jar on თა (ta), then plead for a taste on ფლი (pli). The jar in your hand cues თაფლი (tapli)."
+  },
+  "ი": {
+    letterAnchor: "A building in Batumi",
+    letterCue: "Walk through the arch of ი as though it were a building in Batumi. Listen to the final ee in Batumi as you enter.",
+    wordAnchor: "A violet opening",
+    wordCue: "Between the feet of the Batumi building, a violet opens in two beats. Its petals part on ი (ee) and spread wide on ა (ah). Together they make ია (ia)."
+  },
+  "კ": {
+    letterAnchor: "A popping knuckle",
+    letterCue: "Fold a finger into the open lower curve of კ. The upper bend is its knuckle. Imagine it cracking with a crisp k’ pop.",
+    wordAnchor: "A latch that pops",
+    wordCue: "Knock on a door with one sharp k’ pop, then call a–ri through it. The knock and your call give კ–არი (k’–ari), კარი."
+  },
+  "ლ": {
+    letterAnchor: "Three lace loops",
+    letterCue: "Link the three humps across the top of ლ like loops in a length of lace. Loop and lace both start with l.",
+    wordAnchor: "A lion crouches low",
+    wordCue: "Imagine a lion crouching LOW beside ME, its mane brushing your knee. LOW and ME cue the two beats ლო–მი (lo–mi)."
+  },
+  "მ": {
+    letterAnchor: "A mitten",
+    letterCue: "Slip your hand into the lower loop of მ. Picture the bent upper stroke as the mitten’s folded thumb. Hum the m in mitten.",
+    wordAnchor: "Two steps up a mountain",
+    wordCue: "Hum მ (m) at the foot of a mountain, then step straight onto თა (ta). There is no vowel between the two consonants in მთა (mta)."
+  },
+  "ნ": {
+    letterAnchor: "A bent nail",
+    letterCue: "The flat top of ნ is the head of a nail. Its shaft bends back up into a loop. Nail begins with n.",
+    wordAnchor: "A navy-blue boat",
+    wordCue: "Paint a boat navy blue and write NA–VI on its hull. Navy blue reminds you of ნა–ვი (na–vi), ნავი."
+  },
+  "ო": {
+    letterAnchor: "An open heart",
+    letterCue: "See ო as a heart with a gap at the bottom. Imagine saying oh when you spot the gap. Hold one steady o sound.",
+    wordAnchor: "A pair of oars",
+    wordCue: "Pick up exactly two oars. Oar cues ორ (or). Add ი as you count the pair and you get ორი (ori), two."
+  },
+  "პ": {
+    letterAnchor: "A popcorn popper",
+    letterCue: "The round base of პ is a popcorn pot. A kernel springs up along the top curl with a crisp p’ pop.",
+    wordAnchor: "A cat and a warm loaf",
+    wordCue: "A cat purrs beside a warm loaf of bread. Let its purr remind you of პურ (p’ur), then add ი for პური (p’uri)."
+  },
+  "ჟ": {
+    letterAnchor: "A curled tape measure",
+    letterCue: "The tall right edge of ჟ is a tape measure, with its tape curling back on the left. Listen to the zh sound in measure.",
+    wordAnchor: "A pair of raspberries",
+    wordCue: "Balance two raspberries on your thumbs. Say ჟო (zho) as you eat the first, then rhyme it with ლო (lo) as you eat the second. ჟოლო is raspberry."
+  },
+  "რ": {
+    letterAnchor: "A roller coaster",
+    letterCue: "Ride the sweeping upper rail of რ, then race over the two humps below. Roll the r in roller coaster against the tip of your tongue.",
+    wordAnchor: "A kangaroo’s map",
+    wordCue: "A kangaroo unrolls a treasure map. ROO cues რუ (ru). It stamps კა (k’a) on the treasure spot, completing რუკა (ruk’a)."
+  },
+  "ს": {
+    letterAnchor: "A snake standing up",
+    letterCue: "Trace the tall back and upturned tail of ს like a snake standing on its tail. Hiss sss as you trace.",
+    wordAnchor: "A house with a creaky hinge",
+    wordCue: "Write სა (sa) on the front of a toy house and ლი (li) on the back. The rough-sounding ხ (kh) is the creaky hinge joining them into სახლი (sakhli)."
+  },
+  "ტ": {
+    letterAnchor: "A round thumbtack",
+    letterCue: "Look down on the oval of ტ as the head of a thumbtack. Its straight pin points into the oval. Press it down with a dry t’ pop.",
+    wordAnchor: "A tuba in a lake",
+    wordCue: "A tuba falls into a lake and loses its U. TUBA without U leaves TBA, a spelling cue for ტბა (t’ba) and its popped first sound."
+  },
+  "უ": {
+    letterAnchor: "A U-turn",
+    letterCue: "Follow the small bends at the top of უ down the straight side and around the big U-turn. Stretch the oo in zoom as you take the turn.",
+    wordAnchor: "A neighborhood bunny",
+    wordCue: "A rabbit hops through your neighborhood and someone calls “Ooh, bunny!” Let that scene cue the three Georgian beats უ–ბა–ნი (u–ba–ni)."
+  },
+  "ფ": {
+    letterAnchor: "A puffing pipe",
+    letterCue: "The left loop of ფ is a smoke ring floating above the curved pipe bowl. Puff the p in pipe as you blow the ring.",
+    wordAnchor: "Pulling money from a purse",
+    wordCue: "Imagine pulling a long ribbon of money from a purse. Pull cues the P and L in ფული (puli). Say ფუ (pu) as you pull and ლი (li) as the money lands."
+  },
+  "ქ": {
+    letterAnchor: "A kicking leg",
+    letterCue: "Imagine the tall line of ქ as a standing leg and the lower hook as a kicking foot. Give the first k in kick a puff of air.",
+    wordAnchor: "A car blown away",
+    wordCue: "A gust of wind blows a car off the road. Car cues ქარ (kar). Add ი and start ქარი (kari) with a puff like the gust."
+  },
+  "ღ": {
+    letterAnchor: "A gargoyle mask",
+    letterCue: "The two top humps of ღ form a gargoyle’s eyebrows. Imagine the mask humming a continuous, gravelly gh behind them.",
+    wordAnchor: "A game played at night",
+    wordCue: "Imagine a board game played only at night. Add H after G on its box, turning GAME into GHAME, the spelling cue for ღა–მე (gha–me)."
+  },
+  "ყ": {
+    letterAnchor: "Two stacked cups",
+    letterCue: "Stack two open cups along the upright of ყ. Imagine the lower cup popping loose deep in the stack to cue the deep q’ sound.",
+    wordAnchor: "A mug of java",
+    wordCue: "Take a mug of coffee labeled JAVA. Change its J to Q’ to spell Q’AVA, your cue for ყავა (q’ava)."
+  },
+  "შ": {
+    letterAnchor: "A shy turtle",
+    letterCue: "The closed lower loop of შ is a turtle shell. Two little humps peek over the top. Imagine the shy turtle whispering shhh.",
+    wordAnchor: "A stealthy black sheep",
+    wordCue: "A black sheep named Avi tiptoes by. Whisper shhh to keep it hidden. SH plus AVI brings back შავი (shavi), black."
+  },
+  "ჩ": {
+    letterAnchor: "A chair in profile",
+    letterCue: "The long left stroke of ჩ is the back of a chair. Its lower arch is the gap between the legs. Chair begins with the airy ch.",
+    wordAnchor: "A cup of chai",
+    wordCue: "Order a cup of chai. Its familiar name helps you read ჩა–ი (cha–i), ჩაი, the Georgian word for tea."
+  },
+  "ც": {
+    letterAnchor: "A cat’s curling tail",
+    letterCue: "See the long left curve of ც as a cat’s tail and its right-hand bumps as curled paws. Listen for ts at the end of cats.",
+    wordAnchor: "Skywriting in two letters",
+    wordCue: "A plane draws ც across the sky and loops around to add ა. Say its ts and ah in one burst to read ცა (tsa), sky."
+  },
+  "ძ": {
+    letterAnchor: "A dangling bead",
+    letterCue: "The round loop of ძ is a bead hanging to the left of a straight thread. Say beads and hold onto the final dz sound.",
+    wordAnchor: "A dog with a jangling lead",
+    wordCue: "Picture a dog barking ძა (dza), growling ღ (gh) and tugging its lead on ლი (li). Run the three parts together for ძაღლი (dzaghli)."
+  },
+  "წ": {
+    letterAnchor: "A bottle with a wire cap",
+    letterCue: "The big lower loop of წ is a bottle. The little bends at its top are the wire cap. Imagine the cap flying off with a popped ts’.",
+    wordAnchor: "Two drops of water",
+    wordCue: "Two drops of water pop from a tap, წ (ts’) then ყ (q’). Let the rest flow out as ალი (ali). Join them to get წყალი (ts’q’ali)."
+  },
+  "ჭ": {
+    letterAnchor: "A candle on a saucer",
+    letterCue: "The tall stroke of ჭ is a candle. Wax curls out on the left above a curved saucer. Imagine its wick sputtering a popped ch’.",
+    wordAnchor: "Two clinks of a glass",
+    wordCue: "Tap a drinking glass twice. Give the first clink a pop on ჭი (ch’i) and the second a puff on ქა (ka). Together the clinks make ჭიქა (ch’ika)."
+  },
+  "ხ": {
+    letterAnchor: "A scratchy brush",
+    letterCue: "The tall left handle of ხ meets the oval brush head at its base. Scrub an imaginary stone as you make the rough kh heard in German Bach.",
+    wordAnchor: "Scratching tree bark",
+    wordCue: "Scratch a tree’s rough bark to recall ხ (kh), then carve ე (e) into the wood. Two letters give you ხე (khe), tree."
+  },
+  "ჯ": {
+    letterAnchor: "A jumping figure",
+    letterCue: "The diagonal bar of ჯ is a jumper’s outstretched arms. Its bent lower leg is ready to jump. Jump starts with j.",
+    wordAnchor: "A labeled jam jar",
+    wordCue: "Cover the final ი on a jar labeled ჯემი and you are left with ჯემ (jem), close to English jam. Put the ი lid back on for ჯემი (jemi)."
+  },
+  "ჰ": {
+    letterAnchor: "A fluttering ribbon",
+    letterCue: "Blow on a ribbon until it flutters into the three stacked bends of ჰ. Breathe out the gentle h in hello.",
+    wordAnchor: "Air on a mirror",
+    wordCue: "Breathe warm air onto a mirror. Write ჰა (ha), ე (e), then რი (ri) in the mist. Three breathy beats bring back ჰაერი (haeri), air."
+  }
 };
 
 // Letter outlines are from the bundled Georgian font, with its license in fonts/LICENSE.txt.
@@ -47,28 +213,9 @@ function mnemonicOutline(glyph, transform) {
 }
 
 const mnemonicIllustrations = {
-  "ა": () => `<path d="M0 31Q26 39 55 23M0 39Q31 45 58 32" fill="none" stroke="#d4ba88" stroke-width="1"/>
-    <path d="M136 -5Q148 22 133 46" fill="none" stroke="#91694e" stroke-width="3"/>
-    ${mnemonicOutline("ა","translate(101 138) scale(.077 -.077)")}
-    <path d="M74 96C85 86 90 90 96 94C106 87 117 96 114 109C112 122 101 134 91 136C78 132 63 112 74 96Z" fill="#ec8059" stroke="#594a35" stroke-width="2.4"/>
-    <path d="M96 94Q85 110 91 130" fill="none" stroke="#ba5b3e" stroke-width="1.8"/>
-    <path d="M95 95Q100 79 114 88" fill="none" stroke="#594a35" stroke-width="3" stroke-linecap="round"/>
-    <path d="M99 86Q91 72 77 77Q82 88 99 86Z" fill="#688955" stroke="#465d3f" stroke-width="1.6"/>`,
-  "ე": () => `<path d="M31 79C43 75 44 57 67 62Q75 64 81 75Q62 91 47 86Z" fill="#c96a55" stroke="#674638" stroke-width="2"/>
-    <path d="M46 81Q65 74 78 77Q87 79 84 83Q76 89 63 85Z" fill="#e8a08b" stroke="#674638" stroke-width="1.6"/>
-    <path d="M91 65Q98 75 91 85M98 60Q110 75 99 91" fill="none" stroke="#9c8866" stroke-width="2.2" stroke-linecap="round"/>
-    ${mnemonicOutline("ე","translate(103 96) scale(.064 -.064)")}
-    <path d="M128 50Q151 43 151 67Q151 82 137 85Q126 88 130 103" fill="none" stroke="#bd8b71" stroke-width="2" stroke-linecap="round"/>`,
-  "ი": () => `<path d="M0 105Q54 99 99 106T220 103V160H0Z" fill="#c2d9ca"/>
-    <path d="M0 116Q59 109 108 116T220 110M1 124Q32 122 53 118" fill="none" stroke="#94b6aa" stroke-width="1.5"/>
-    <circle cx="169" cy="44" r="11" fill="#e5b864"/>
-    <path d="M98 125V79Q98 43 125 43Q151 43 151 79V125Z" fill="#dda96e"/>
-    <path d="M111 64h5v7h-5zm14-4h5v7h-5zm13 5h5v7h-5zm-25 14h5v7h-5zm15-3h5v7h-5zm9 15h5v7h-5z" fill="#927c59"/>
-    ${mnemonicOutline("ი","translate(83 123) scale(.078 -.078)")}
-    <path d="M0 139Q44 128 81 132T154 124T220 128V160H0Z" fill="#b7c393"/>
-    <g stroke="#698458" stroke-width="1.8" fill="none"><path d="M117 140l3-13m-3 12l-4-6m12 6l3-15m7 13l-2-8"/></g>
-    <g fill="#866791"><circle cx="119" cy="125" r="3"/><circle cx="123" cy="126" r="2.4"/><circle cx="117" cy="128" r="2"/>
-    <circle cx="126" cy="123" r="2.4"/><circle cx="130" cy="123" r="2.4"/><circle cx="128" cy="126" r="2.2"/><circle cx="133" cy="128" r="2.6"/></g>`,
+  "ა": () => `<path d="M110 0v21q0 7 7 9" fill="none" stroke="#a47c47" stroke-width="3"/>${mnemonicOutline("ა","translate(70 131) scale(.084 -.084)")}<path d="M66 74q-7 2-11 8m9-17-13 1" fill="none" stroke="#d9974a" stroke-width="3" stroke-linecap="round"/>`,
+  "ე": () => `${mnemonicOutline("ე","translate(68 96) scale(.078 -.078)")}<path d="M106 47q22-18 27 4t-13 33q-11 6-10 18" fill="none" stroke="#bb8263" stroke-width="3" stroke-linecap="round"/><path d="M65 59q-9 14 0 28m-8-33q-14 19-2 38" fill="none" stroke="#ccba88" stroke-width="2"/>`,
+  "ი": () => `<path d="M0 111Q50 99 94 111T220 109v43H0Z" fill="#b6d5c4"/><circle cx="164" cy="42" r="11" fill="#ebbd5e"/><path d="M83 126V78q0-46 28-46t29 46v48Z" fill="#dfa46a"/><path d="M100 61h7v9h-7zm17-2h7v9h-7zm-17 20h7v9h-7zm17-1h7v9h-7zm-8 24h9v24h-9z" fill="#836e50"/>${mnemonicOutline("ი","translate(68 124) scale(.083 -.083)")}<path d="M2 136q45-11 82-5t81 0 55 0v21H0Z" fill="#aebc87"/>`
 };
 
 // The card already presents the same scene in text, so the picture is decorative to a screen reader.

@@ -2689,3 +2689,35 @@ dialog details a {
   .lab-instructions > div { grid-template-columns: 1fr; gap: 3px; }
   .mnemonic-picture { width: min(25%,85px); }
 }
+
+/* Distinct retrieval cues for the letter shape and the vocabulary word. */
+.letter-memory {margin:12px 0;text-align:left}
+.word-mnemonic {margin-top:7px;padding-top:9px;border-top:1px solid #d8dacb;width:100%}
+.word-mnemonic .kicker {display:flex;color:#54694b}
+.word-mnemonic > strong {display:block;font-family:var(--sans);font-size:.92rem;margin:5px 0;font-weight:660}
+.word-mnemonic p {font-size:.88rem;color:#4d5448;line-height:1.45}
+.example > div {flex:1;min-width:0}
+.peach {background:#f2bd95}.sky {background:#b4cdda}.rose {background:#e3b0a7}
+.mini-dot.peach {background:#a55838}.mini-dot.sky {background:#518099}.mini-dot.rose {background:#a45b60}
+.shape-clue {font-size:clamp(1.65rem,4.6vw,2.8rem);margin:22px auto 30px;max-width:22ch}
+.missing-word {font-size:clamp(2.25rem,7vw,3.8rem);line-height:1.45;margin-top:10px}
+.missing-reading {font-family:var(--mono);color:var(--muted);margin:3px 0 22px}
+.pair-board {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:20px 0}
+.pair-tile {min-height:75px;padding:7px 3px;display:flex;align-items:center;justify-content:center;gap:4px;border:1px solid #c79089;border-radius:9px;background:repeating-linear-gradient(45deg,#f0c8be 0px,#f0c8be 7px,#efc1b7 7px,#efc1b7 9px);color:#785651}
+.pair-tile:enabled:hover {border-color:#874d45}
+.pair-tile.face-up {background:#fff9ed;color:var(--ink);border-color:#c6beac}
+.pair-tile b {overflow-wrap:anywhere;font-size:clamp(.74rem,2vw,1rem)}
+.pair-tile b[lang=ka] {font-size:clamp(.85rem,2.4vw,1.2rem)}
+.pair-tile.matched {background:#e3ebdb;border-color:#a2b799}
+.pair-message {margin:10px 0;color:var(--muted);font-size:.9rem}
+@media(max-width:450px){.pair-board{gap:5px}.pair-tile{min-height:63px}.pair-tile.matched .icon{display:none}}
+
+.extra-word {margin: .7rem 0 1rem; text-align: left;}
+.extra-word > summary {cursor: pointer; font-weight: 600; font-size: .88rem; color: var(--muted); padding-block: .4rem;}
+.extra-word .example {margin-top: .45rem;}
+.lab-minimal {margin: 1.2rem 0; padding: 1rem; background: #f1f1e8; border-radius: 12px;}
+.lab-minimal h3 {margin: 0 0 .4rem;}
+.lab-minimal .lab-word {margin-top: .5rem;}
+.matched-audio {margin: .65rem 0;}
+.example .decode-row, .slots, .tile-tray {flex-wrap: wrap;}
+.example-word > strong, .lab-word b, .pair-tile b, .missing-word {overflow-wrap: anywhere;}

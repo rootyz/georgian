@@ -1,10 +1,11 @@
 // Increment the version whenever the bundled app or content changes.
+importScripts('./recordings.js', './speaker-audio.js');
 const prefix = `anbani:${self.registration.scope}:`;
-const cacheName = `${prefix}1.2.0`;
+const cacheName = `${prefix}1.3.0`;
 const files = [
-  './index.html', './style.css', './data.js', './study.js', './interface.js', './mnemonics.js', './sound-guides.js', './sound-lab.js', './games.js', './app.js', './manifest.webmanifest',
+  './recordings.js', './speaker-audio.js', './vocabulary.js', './audio/SPEAKERS.txt', './index.html', './style.css', './data.js', './study.js', './interface.js', './mnemonics.js', './sound-guides.js', './sound-lab.js', './games.js', './app.js', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png', './icons/apple-touch.png',
-  './art/landscape.webp', './art/match.webp', './art/build.webp', './art/sprint.webp', './fonts/georgian.ttf',
+  './art/landscape.webp', './art/match.webp', './art/build.webp', './art/sprint.webp', './art/shape.webp', './art/missing.webp', './art/pairs.webp', './fonts/georgian.ttf',
   './audio/CREDITS.txt', './audio/LICENSE.txt', './audio/words/CREDITS.txt',
   ...Array.from({ length: 33 }, (_, index) => {
     const file = String(index + 1).padStart(2, '0') + '.mp3';
@@ -53,6 +54,17 @@ self.addEventListener('fetch', event => {
     url = new URL(req.url);
   if (req.method !== 'GET' || !url.href.startsWith(self.registration.scope)) return;
   event.respondWith((async () => {
+    const voiceRoot = new URL('./speakers/', self.registration.scope);
+    if (url.pathname.startsWith(voiceRoot.pathname)) {
+      const id = /^(\d+)\.(wav|ogg|mp3)$/.exec(url.pathname.slice(voiceRoot.pathname.length));
+      const recording = id && RECORDINGS.find(item => item.cardNumber === Number(id[1]));
+      if (!recording) return new Response(null, {status: 404});
+      try {
+        const voice = await SpeakerAudio.load(self.registration.scope, recording, id[2] === 'mp3');
+        const range = req.headers.get('Range');
+        return range ? partial(voice, range) : voice;
+      } catch { return new Response(null, {status: 503}); }
+    }
     const cache = await caches.open(cacheName);
     const home = new URL('./', self.registration.scope);
     const isHome = req.mode === 'navigate' && (url.pathname === home.pathname || url.pathname === new URL(indexURL).pathname);
