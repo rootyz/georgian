@@ -33,6 +33,15 @@
   const icon = (key, size = 20) => `<svg class="icon" aria-hidden="true" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${paths[key]||''}</svg>`;
   const menu = [['desk', 'Study desk'], ['alphabet', 'Alphabet'], ['sounds', 'Sound lab'], ['games', 'Games'], ['progress', 'Progress']];
   const games = {
+    names: {
+      name: 'Letter names',
+      desc: 'See a name like Bani. Find its Georgian letter.',
+      icon: 'alphabet',
+      tag: 'Name recall',
+      art: 'names',
+      color: 'lilac',
+      instructions: 'Read the letter name and choose its Georgian letter from four options. Play eight questions at your own pace. Use the number keys 1–4 or tap a letter.'
+    },
     shape: {name:'Shape hunt', desc:'Find the glyph from its visual memory cue.',icon:'search',tag:'Shape recall',art:'shape',color:'peach',
       instructions:'Read the letter-shape clue and find the Georgian glyph it describes. After you choose, compare your answer with the full mnemonic.'},
     missing: {name:'Missing letter', desc:'Restore one missing letter in a real word.',icon:'edit',tag:'Word recall',art:'missing',color:'sky',

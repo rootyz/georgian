@@ -34,7 +34,7 @@
     for (const [d, v] of Object.entries(s.activity)) {
       if (!dateKey(d) || !v || ![v.reviews, v.games].every(n => Number.isSafeInteger(n) && n >= 0)) return false;
     }
-    return Object.entries(s.best).every(([k, v]) => ['match', 'build', 'sprint', 'shape', 'missing', 'pairs'].includes(k) && Number.isSafeInteger(v) && v >= 0);
+    return Object.entries(s.best).every(([k, v]) => ['match', 'build', 'sprint', 'shape', 'missing', 'pairs', 'names'].includes(k) && Number.isSafeInteger(v) && v >= 0);
   }
   let storageOK = true;
 

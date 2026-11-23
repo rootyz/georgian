@@ -46,6 +46,7 @@
 
   function pool() {
     if (poolChoice === 'all') return ALPHABET;
+    if (gameId === 'names' && poolChoice === 'starter') return ALPHABET.slice(0, 8);
     if (usesWords()) return starterWordLetters.map(glyph => byGlyph.get(glyph));
     return [...(poolChoice === 'mine' ? Object.keys(Study.state.cards) : introLetters)].map(g => byGlyph.get(g));
   }
@@ -185,17 +186,28 @@
       const tiles = run.tiles.map((glyph, i) => `<button class="letter-key" data-game-tile="${i}" ${run.feedback!==null||run.picks.includes(i)||run.picks.length>=c.word.length?'disabled':''} lang="ka">${glyph}</button>`).join('');
       play = `<p class="prompt">Build the Georgian word for <b>${esc(c.meaning)}</b>.</p><div class="game-word"><strong class="word-reading">${esc(c.reading)}</strong>${wordSoundButton(c)}</div><div class="slots">${slots}</div><div class="tile-tray">${tiles}</div>${run.feedback===null?`<div class="button-row"><button class="primary" data-game-act="check" ${run.picks.length===c.word.length?'':'disabled'}>Check word</button><button class="soft-btn" data-game-act="hint" ${run.hint?'disabled':''}>${run.hint?'Hint used':'Show hint'}</button></div>${run.hint?`<p class="hint">The first letter is <b lang="ka">${c.glyph}</b> (${esc(c.latin)}).</p>`:''}`:''}`;
     } else {
-      const glyphChoices = sprint || gameId === 'shape' || gameId === 'missing';
+      const glyphChoices = ['sprint', 'shape', 'missing', 'names'].includes(gameId);
       const options = run.choices.map((o, i) => `<button class="option ${glyphChoices?'option-glyph':''} ${run.feedback!==null?(o===run.answer?'correct':o===run.selected?'incorrect':''):''}" data-game-answer="${i}" ${run.feedback!==null?'disabled':''}><small>${i+1}</small><b ${glyphChoices?'lang="ka"':''}>${glyphChoices?o.glyph:esc(o.latin)}</b></button>`).join('');
       play = `<p class="prompt">${sprint?'Which Georgian letter makes this sound?':'Which sound does this letter make?'}</p><div class="quiz-glyph" ${sprint?'':'lang="ka"'}>${sprint?esc(c.latin):c.glyph}</div><div class="options">${options}</div>`;
-      if (gameId === 'shape') {
+      if (gameId === 'names') {
+        play = `<p class="prompt">Which Georgian letter is called</p><h2 class="shape-clue">${esc(c.name)}?</h2><div class="options">${options}</div>`;
+      } else if (gameId === 'shape') {
         play = `<p class="prompt">Which letter looks like this?</p><h2 class="shape-clue">${esc(MNEMONICS[c.glyph].letterAnchor)}</h2><div class="options">${options}</div>`;
       } else if (gameId === 'missing') {
         const masked = [...c.word].map((g,i)=>i===run.blankPosition?'＿':g).join('');
         play = `<p class="prompt">Which letter completes the word for <strong>${esc(c.meaning)}</strong>?</p><div class="missing-word" lang="ka">${masked}</div><p class="missing-reading">${esc(c.reading)}</p><div class="options">${options}</div>`;
       }
     }
-    const fb = run.feedback === null ? '' : `<div class="feedback ${run.feedback?'yes':'no'}" role="status"><span>${icon(run.feedback?'check':'info',19)} ${run.feedback?'Correct!':'Answer'} <b lang="ka">${build || gameId==='missing'?c.word:c.glyph}</b> · ${esc(build || gameId==='missing'?c.reading:c.latin)}</span><button class="secondary small" data-game-act="next">${!sprint&&run.total>=run.limit?'See results':'Next'}</button></div>`;
+    let fb = '';
+    if (run.feedback !== null) {
+      const showWord = build || gameId === 'missing';
+      let answer = `<b lang="ka">${showWord ? c.word : c.glyph}</b> · ${esc(showWord ? c.reading : c.latin)}`;
+      if (gameId === 'names') {
+        answer = `${esc(c.name)} is <b lang="ka">${c.glyph}</b>.`;
+        if (!run.feedback) answer += ` You picked <b lang="ka">${run.selected.glyph}</b> (${esc(run.selected.name)}).`;
+      }
+      fb = `<div class="feedback ${run.feedback?'yes':'no'}" role="status"><span>${icon(run.feedback?'check':'info',19)} ${run.feedback ? 'Correct!' : gameId === 'names' ? '' : 'Answer'} ${answer}</span><button class="secondary small" data-game-act="next">${!sprint&&run.total>=run.limit?'See results':'Next'}</button></div>`;
+    }
     root().innerHTML = `<div class="action-heading"><a class="text-link" href="#games">${icon('back',16)} Arcade</a><span>${g.name}</span></div><section class="question-panel"><div class="panel-top"><span class="kicker"><i class="mini-dot ${g.color}"></i>${sprint?'Speed round':`Round ${Math.min(run.limit,run.total+(run.feedback===null?1:0))} of ${run.limit}`}</span><span class="round-stat">${sprint?`${icon('time',16)} <b id="clock">${Math.max(0,Math.ceil((run.deadline-performance.now())/1000))}s</b><i>·</i>`:''} ${run.score} correct</span></div><div class="question-body">${play}${fb}${run.feedback!==null && gameId==='missing' ? `<div class="matched-audio">${wordSoundButton(c)}</div>` : ''}${run.feedback!==null && gameId==='shape' ? `<p class="cue">${esc(MNEMONICS[c.glyph].letterCue)}</p>` : ''}</div></section>`;
   }
 

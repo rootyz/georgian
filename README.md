@@ -22,6 +22,7 @@ For an existing Pages installation, upload the updated files to the same folder.
 - Later intervals grow with successful recall. A letter is marked **Learned** when its interval reaches 21 days. The progress ring counts every letter you have studied at least once.
 - The desk starts with five new letters per local calendar day, plus due reviews. Use the gear to choose three, five, eight, or twelve new letters. In a review, press **Space** to reveal and **1–4** to rate.
 - The **Alphabet** tab lets you search all 33 letters by glyph, name, sound, or example word. Open a letter and choose **Trace letter** for freehand practice.
+- **Letter names** shows a name such as *Bani* and asks you to pick **ბ** from four Georgian letters. The starter set covers the first eight letters. Choose **Full alphabet** to practice any of the 33 names, or **My studied letters** once you have studied at least four. Each game has eight questions.
 - **Shape hunt** asks you to identify a letter from its visual mnemonic. **Missing letter** has you restore a gap in a Georgian word. **Word pairs** challenges you to match four Georgian words with their English meanings in eight moves.
 - **Letter match** tests recognition in eight questions. **Word builder** gives five words to spell from tiles. **Speed round** gives 45 seconds to identify as many letters as possible. Games track their own scores. Card ratings control spaced repetition.
 

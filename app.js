@@ -84,7 +84,7 @@
       month: 'long'
     });
     return `${title('Study desk','Your personal workspace for the Georgian alphabet.',`<span class="date">${icon('cal',17)}${date}</span>`)}
-    <div class="desk-grid"><div class="desk-left">${hero()}<section class="arcade-section"><div class="section-head"><h2>Practice arcade</h2><a href="#games" class="text-link">All games</a></div><div class="game-grid">${['shape','pairs','missing'].map(gameCard).join('')}</div></section></div>
+    <div class="desk-grid"><div class="desk-left">${hero()}<section class="arcade-section"><div class="section-head"><h2>Practice arcade</h2><a href="#games" class="text-link">All games</a></div><div class="game-grid">${['names','shape','pairs'].map(gameCard).join('')}</div></section></div>
     <aside>${progressBox()}${spotlightBox()}</aside></div>
     <section class="shelf"><div class="section-head"><h2>Alphabet shelf</h2><a href="#alphabet" class="text-link">Explore all 33</a></div><div class="shelf-grid">${ALPHABET.slice(0,8).map(glyphCard).join('')}</div></section>`;
   }
@@ -102,7 +102,7 @@
   }
 
   function gamesPage() {
-    return `${title('Practice arcade','Practice letter shapes, word meanings, spelling, and speed.')}<div class="game-grid big-games">${Object.keys(games).map(gameCard).join('')}</div>`;
+    return `${title('Practice arcade','Practice letter names and shapes, word meanings, spelling, and speed.')}<div class="game-grid big-games">${Object.keys(games).map(gameCard).join('')}</div>`;
   }
 
   function weekly() {
