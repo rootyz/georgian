@@ -1,18 +1,21 @@
 // Increment the version whenever the bundled app or content changes.
 const prefix = `anbani:${self.registration.scope}:`;
-const cacheName = `${prefix}1.0.0`;
+const cacheName = `${prefix}1.2.0`;
 const files = [
-  './index.html', './style.css', './data.js', './study.js', './interface.js', './games.js', './app.js', './manifest.webmanifest',
+  './index.html', './style.css', './data.js', './study.js', './interface.js', './mnemonics.js', './sound-guides.js', './sound-lab.js', './games.js', './app.js', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png', './icons/apple-touch.png',
   './art/landscape.webp', './art/match.webp', './art/build.webp', './art/sprint.webp', './fonts/georgian.ttf',
-  './audio/CREDITS.txt', './audio/LICENSE.txt',
-  ...Array.from({
-    length: 33
-  }, (_, i) => `./audio/${String(i+1).padStart(2,'0')}.mp3`)
+  './audio/CREDITS.txt', './audio/LICENSE.txt', './audio/words/CREDITS.txt',
+  ...Array.from({ length: 33 }, (_, index) => {
+    const file = String(index + 1).padStart(2, '0') + '.mp3';
+    return [`./audio/${file}`, `./audio/words/${file}`];
+  }).flat()
 ];
 const indexURL = new URL('./index.html', self.registration.scope).href;
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(cacheName).then(cache => cache.addAll(files)));
+  // Get current bytes even when an older release used the same asset URLs.
+  const requests = files.map(file => new Request(new URL(file, self.registration.scope), {cache: 'reload'}));
+  event.waitUntil(caches.open(cacheName).then(cache => cache.addAll(requests)));
 });
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {

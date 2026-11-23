@@ -11,6 +11,7 @@
       gameCard,
       soundButton,
       wordExample,
+      memoryCue,
       title,
       glyphCard
     } = UI;
@@ -38,7 +39,7 @@
   }
 
   function head() {
-    const active = route === 'session' ? 'desk' : route.startsWith('game/') ? 'games' : route;
+    const active = route === 'session' ? 'desk' : route.startsWith('game/') ? 'games' : route.split('/')[0];
     $('#navigation').innerHTML = menu.map(([k, label]) => `<a href="#${k}" ${k===active?'aria-current="page"':''}>${icon(k,18)}<span>${label}</span></a>`).join('');
     $('#streak').innerHTML = `${icon('flame',19)} <span>${S.streak()}<span class="streak-words"> day streak</span></span>`;
     $('#streak').setAttribute('aria-label', `${S.streak()} day study streak. View progress.`);
@@ -137,7 +138,7 @@
     const c = S.byGlyph.get(q[session.index]),
       r = session.revealed,
       status = S.status(c.glyph);
-    return `<div class="action-heading"><a class="text-link" href="#desk">${icon('back',16)}Study desk</a><span>Daily flashcards</span></div><section class="question-panel review"><div class="panel-top"><span class="kicker">${icon('cards',17)}Card ${session.index+1} of ${q.length}</span><span class="state"><i class="status-dot ${status.toLowerCase()}"></i>${status}</span></div><div class="session-meter"><i style="width:${100*session.index/q.length}%"></i></div><div class="question-body"><p class="prompt">${r?'Read it aloud, then rate your recall.':'What sound does this letter make?'}</p><div class="flash-letter grid-paper" lang="ka">${c.glyph}</div>${r?`<div class="answer-title"><h2>${esc(c.name)} <span>· ${esc(c.latin)}</span></h2>${soundButton(c.glyph)}</div><div class="answer-meta">${c.category} <i>·</i> /${esc(c.ipa)}/</div><p class="cue">${esc(c.tip)}</p>${wordExample(c)}<fieldset class="ratings"><legend>How well did you remember?</legend>${['again','hard','good','easy'].map((gr,i)=>`<button class="grade ${gr}" data-grade="${gr}" title="Shortcut ${i+1}"><strong>${gr[0].toUpperCase()+gr.slice(1)}</strong><small>${S.delayLabel(S.interval(c.glyph,gr))}</small></button>`).join('')}</fieldset>`:`<button class="primary" data-act="reveal">Reveal answer</button><span class="keyhint">Press <kbd>Space</kbd> to reveal</span>`}</div></section>`;
+    return `<div class="action-heading"><a class="text-link" href="#desk">${icon('back',16)}Study desk</a><span>Daily flashcards</span></div><section class="question-panel review"><div class="panel-top"><span class="kicker">${icon('cards',17)}Card ${session.index+1} of ${q.length}</span><span class="state"><i class="status-dot ${status.toLowerCase()}"></i>${status}</span></div><div class="session-meter"><i style="width:${100*session.index/q.length}%"></i></div><div class="question-body"><p class="prompt">${r?'Read it aloud, then rate your recall.':'What sound does this letter make?'}</p><div class="flash-letter grid-paper" lang="ka">${c.glyph}</div>${r?`<div class="answer-title"><h2>${esc(c.name)} <span>· ${esc(c.latin)}</span></h2>${soundButton(c.glyph)}</div><div class="answer-meta">${c.category} <i>·</i> /${esc(c.ipa)}/</div><p class="cue">${esc(c.tip)}</p>${wordExample(c)}${memoryCue(c)}${SoundLab.cardLink(c.glyph)}<fieldset class="ratings"><legend>How well did you remember?</legend>${['again','hard','good','easy'].map((gr,i)=>`<button class="grade ${gr}" data-grade="${gr}" title="Shortcut ${i+1}"><strong>${gr[0].toUpperCase()+gr.slice(1)}</strong><small>${S.delayLabel(S.interval(c.glyph,gr))}</small></button>`).join('')}</fieldset>`:`${memoryCue(c,true)}<button class="primary" data-act="reveal">Reveal answer</button><span class="keyhint">Press <kbd>Space</kbd> to reveal</span>`}</div></section>`;
   }
 
   function view() {
@@ -147,6 +148,7 @@
       libraryResults();
     } else if (route === 'progress') main.innerHTML = progress();
     else if (route === 'games') main.innerHTML = gamesPage();
+    else if (route.split('/')[0] === 'sounds') main.innerHTML = SoundLab.html();
     else if (route === 'session') main.innerHTML = sessionPage();
     else main.innerHTML = Arcade.intro(route.split('/')[1]);
     head();
@@ -158,15 +160,16 @@
       main.focus();
       return;
     }
-    const dest = menu.some(([k]) => k === raw) || raw === 'session' || (raw.startsWith('game/') && Object.hasOwn(games, raw.slice(5))) ? raw : 'desk';
+    const dest = menu.some(([k]) => k === raw) || raw === 'session' || (raw.startsWith('sounds/') && SoundLab.has(raw.slice(7))) || (raw.startsWith('game/') && Object.hasOwn(games, raw.slice(5))) ? raw : 'desk';
     const initial = !route;
     if (dialog.open) dialog.close();
     audio?.pause();
     Arcade.stop();
     session = null;
     route = dest;
+    SoundLab.reset(dest.split('/')[1]);
     view();
-    document.title = `${route.startsWith('game/')?games[route.slice(5)].name:menu.find(k=>k[0]===route)?.[1]||'Daily flashcards'} · Anbani`;
+    document.title = `${route.startsWith('game/')?games[route.slice(5)].name:menu.find(k=>k[0]===route.split('/')[0])?.[1]||'Daily flashcards'} · Anbani`;
     window.scrollTo(0, 0);
     if (!initial) main.focus({
       preventScroll: true
@@ -181,16 +184,18 @@
     }
   }
 
-  function play(g) {
+  function play(g, wholeWord = false) {
     if (!S.byGlyph.has(g)) return;
     audio?.pause();
-    audio = new Audio(`./audio/${number(idx(g)+1)}.mp3`);
+    const folder = wholeWord ? './audio/words' : './audio';
+    audio = new Audio(`${folder}/${number(idx(g) + 1)}.mp3`);
     audio.play().catch(e => {
       if (e.name !== 'AbortError') toast('Audio could not play. Check the device audio output and try again.');
     });
   }
 
   function openDialog(markup) {
+    audio?.pause();
     if (!dialog.open) priorFocus = document.activeElement;
     modal.innerHTML = markup;
     if (!dialog.open) dialog.showModal();
@@ -205,7 +210,7 @@
     const c = S.byGlyph.get(g);
     if (!c) return;
     selectedLetter = g;
-    openDialog(`<div class="modal-head"><span class="kicker">Letter ${number(idx(g)+1)} / 33</span>${closeBtn}</div><div class="detail-letter grid-paper" lang="ka">${g}</div><div class="detail-head"><div><h2>${esc(c.name)}</h2><p>${c.category} · ${esc(c.latin)} · /${esc(c.ipa)}/</p></div>${soundButton(g)}</div><p class="cue">${esc(c.tip)}</p>${wordExample(c)}<div class="detail-bottom"><button class="secondary" data-act="trace">${icon('edit',16)}Trace letter</button><div><button class="square" data-shift="-1" aria-label="Previous letter">${icon('back',17)}</button><button class="square" data-shift="1" aria-label="Next letter">${icon('next',17)}</button></div></div>`);
+    openDialog(`<div class="modal-head"><span class="kicker">Letter ${number(idx(g)+1)} / 33</span>${closeBtn}</div><div class="detail-letter grid-paper" lang="ka">${g}</div><div class="detail-head"><div><h2>${esc(c.name)}</h2><p>${c.category} · ${esc(c.latin)} · /${esc(c.ipa)}/</p></div>${soundButton(g)}</div><p class="cue">${esc(c.tip)}</p>${wordExample(c)}${memoryCue(c)}${SoundLab.cardLink(g)}<div class="detail-bottom"><button class="secondary" data-act="trace">${icon('edit',16)}Trace letter</button><div><button class="square" data-shift="-1" aria-label="Previous letter">${icon('back',17)}</button><button class="square" data-shift="1" aria-label="Next letter">${icon('next',17)}</button></div></div>`);
   }
 
   function trace() {
@@ -249,7 +254,7 @@
 
   function settings() {
     selectedLetter = null;
-    openDialog(`<div class="modal-head"><span class="kicker">Preferences</span>${closeBtn}</div><h2>Study settings</h2><div class="setting-row"><div><label for="goal">New letters per day</label><p>Due reviews are always included.</p></div><select id="goal">${[3,5,8,12].map(n=>`<option value="${n}" ${S.state.goal===n?'selected':''}>${n}</option>`).join('')}</select></div><div class="setting-block"><h3>Progress backup</h3><p>Progress stays in this browser. Export a copy to move it to another device.</p><div class="button-row"><button class="secondary small" data-act="export">${icon('download',16)}Export</button><button class="secondary small" data-act="import">Import backup</button><input hidden type="file" id="backup" accept=".json,application/json"></div></div><div class="setting-block"><h3>Offline & installation</h3><p id="offline-status">${offlineReady?'Offline practice is ready on this device.':'Open the app online over HTTPS and leave it open briefly to save the offline lessons.'}</p>${installPrompt?'<button class="secondary small" data-act="install">Install Anbani</button>':'<p>Use your browser’s install option or Add to Home Screen where available.</p>'}</div><details><summary>About the alphabet & audio</summary><p>Mkhedruli has 33 letters. An apostrophe in the Latin spelling marks an ejective sound. IPA appears between slashes.</p><p>Letter clips come from the <a href="https://github.com/noBloodOnTheLeaves/alphabet_learner" target="_blank" rel="noopener">Alphabet Learner project</a>. <a href="./audio/CREDITS.txt" target="_blank" rel="noopener">Audio credits</a></p></details>`);
+    openDialog(`<div class="modal-head"><span class="kicker">Preferences</span>${closeBtn}</div><h2>Study settings</h2><div class="setting-row"><div><label for="goal">New letters per day</label><p>Due reviews are always included.</p></div><select id="goal">${[3,5,8,12].map(n=>`<option value="${n}" ${S.state.goal===n?'selected':''}>${n}</option>`).join('')}</select></div><div class="setting-block"><h3>Progress backup</h3><p>Progress stays in this browser. Export a copy to move it to another device.</p><div class="button-row"><button class="secondary small" data-act="export">${icon('download',16)}Export</button><button class="secondary small" data-act="import">Import backup</button><input hidden type="file" id="backup" accept=".json,application/json"></div></div><div class="setting-block"><h3>Offline & installation</h3><p id="offline-status">${offlineReady?'Offline practice is ready on this device.':'Open the app online over HTTPS and leave it open briefly to save the offline lessons.'}</p>${installPrompt?'<button class="secondary small" data-act="install">Install Anbani</button>':'<p>Use your browser’s install option or Add to Home Screen where available.</p>'}</div><details><summary>About the alphabet & audio</summary><p>Mkhedruli has 33 letters. An apostrophe in the Latin spelling marks an ejective sound. IPA appears between slashes.</p><p>Letter clips come from the <a href="https://github.com/noBloodOnTheLeaves/alphabet_learner" target="_blank" rel="noopener">Alphabet Learner project</a>. <a href="./audio/CREDITS.txt" target="_blank" rel="noopener">Letter credits</a>. The whole-word clips use a synthesized Georgian voice. <a href="./audio/words/CREDITS.txt" target="_blank" rel="noopener">Whole-word audio credits</a></p></details>`);
   }
 
   function exportData() {
@@ -287,12 +292,17 @@
       return;
     }
     const ds = el.dataset;
+    if (ds.labAct || ds.labPick) {
+      SoundLab.click(el, play);
+      return;
+    }
     if (ds.gameAct !== undefined || ds.gameAnswer !== undefined || ds.gameTile !== undefined || ds.gameRemove !== undefined) {
+      if (ds.gameAct === 'next') audio?.pause();
       Arcade.click(el);
       return;
     }
-    if (ds.sound) {
-      play(ds.sound);
+    if (ds.sound || ds.wordSound) {
+      play(ds.sound || ds.wordSound, Boolean(ds.wordSound));
       return;
     }
     if (ds.letter) {
@@ -312,6 +322,7 @@
       return;
     }
     if (ds.grade && route === 'session' && session?.revealed && session.index < session.queue.length) {
+      audio?.pause();
       S.rate(session.queue[session.index], ds.grade);
       if (ds.grade === 'again') session.again++;
       session.index++;
@@ -375,6 +386,7 @@
     }
   });
   document.addEventListener('change', e => {
+    if (e.target.id === 'sound-lesson' && SoundLab.has(e.target.value)) location.hash = 'sounds/' + e.target.value;
     if (e.target.id === 'goal') {
       S.setGoal(Number(e.target.value));
       if (route === 'desk') view();
@@ -388,7 +400,7 @@
   document.addEventListener('keydown', e => {
     if (dialog.open || e.repeat || e.ctrlKey || e.altKey || e.metaKey || e.target.matches('input,textarea,select')) return;
     if (route === 'session' && session?.index < session?.queue.length) {
-      if (e.code === 'Space' && !session.revealed && !(e.target.closest('a,button') && !e.target.matches('[data-act="reveal"]'))) {
+      if (e.code === 'Space' && !session.revealed && !(e.target.closest('a,button,summary') && !e.target.matches('[data-act="reveal"]'))) {
         e.preventDefault();
         $('[data-act="reveal"]')?.click();
       } else if (session.revealed && /^[1-4]$/.test(e.key)) {

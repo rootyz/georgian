@@ -1,0 +1,42 @@
+Georgian whole-word pronunciation examples
+
+All 33 MP3 files in this directory contain synthesized speech. Each clip reads the complete example word from its card in the Georgian voice of eSpeak NG. The source text is the Georgian spelling in the app.
+
+The rendering voice uses glottal-release models for the ejective series. The initial sound in ჭიქა uses the postalveolar ejective affricate model. Each example was rendered as one word, volume-matched and encoded as a mono MP3. The built-in voice produces approximate pronunciation and has a computer-generated timbre.
+
+Speech engine: eSpeak NG contributors, https://github.com/espeak-ng/espeak-ng
+Render wrapper: text2wav.node.js by abbr, https://github.com/abbr/text2wav.node.js/tree/f4e9dae9dfc7c63ba7f9a229480653c156053628
+
+01.mp3  ატამი  peach
+02.mp3  ბალი  cherry
+03.mp3  გული  heart
+04.mp3  დედა  mother
+05.mp3  ენა  tongue
+06.mp3  ვაშლი  apple
+07.mp3  ზარი  bell
+08.mp3  თაფლი  honey
+09.mp3  ია  violet
+10.mp3  კარი  door
+11.mp3  ლომი  lion
+12.mp3  მთა  mountain
+13.mp3  ნავი  boat
+14.mp3  ორი  two
+15.mp3  პური  bread
+16.mp3  ჟოლო  raspberry
+17.mp3  რუკა  map
+18.mp3  სახლი  house
+19.mp3  ტბა  lake
+20.mp3  უბანი  neighborhood
+21.mp3  ფული  money
+22.mp3  ქარი  wind
+23.mp3  ღამე  night
+24.mp3  ყავა  coffee
+25.mp3  შავი  black
+26.mp3  ჩაი  tea
+27.mp3  ცა  sky
+28.mp3  ძაღლი  dog
+29.mp3  წყალი  water
+30.mp3  ჭიქა  drinking glass
+31.mp3  ხე  tree
+32.mp3  ჯემი  jam
+33.mp3  ჰაერი  air

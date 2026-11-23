@@ -11,9 +11,13 @@ Anbani is an offline-capable Georgian alphabet trainer. Start at **Study desk �
 
 The app uses relative paths and works at a repository URL such as `https://YOUR-NAME.github.io/YOUR-REPOSITORY/`. It is ready to serve as uploaded. [GitHub Pages publishing guide](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 
+For an existing Pages installation, upload the updated files to the same folder. Open the site online, close its open tabs or app windows, and reopen it to activate the new offline content. The update uses the same progress storage as the first release.
+
 ## Study
 
-- Reveal each flashcard after trying the sound aloud. Listen to the letter, then read its example word. The highlighted first letter shows where the sound appears.
+- Reveal each flashcard after trying the sound aloud. Tap **Hear word** beside the Georgian example to hear the complete word. Try it aloud, then use **Read letter by letter** to practice a difficult sound. Whole-word playback also works in the alphabet library and Word builder.
+- Each letter has a visual memory cue tied to its example word. Choose **Show a memory hint** before revealing a flashcard or find the full cue on the answer side and in the library. Three illustrated cues use a peach hook, a left ear, and an imagined building in Batumi.
+- Open **Sound lab** for seven pronunciation lessons. Compare letter recordings, listen to whole example words, and follow the tongue, lips, breath, and throat instructions. Select **Start listening drill** for a five-question sound identification exercise.
 - Rate your recall with **Again**, **Hard**, **Good**, or **Easy**. The interval printed on each button is when the card will return. A new card rated Again returns in one minute, Hard in ten minutes, Good in one day, and Easy in four days. Open another session from the desk when a review is due.
 - Later intervals grow with successful recall. A letter is marked **Learned** when its interval reaches 21 days. The progress ring counts every letter you have studied at least once.
 - The desk starts with five new letters per local calendar day, plus due reviews. Use the gear to choose three, five, eight, or twelve new letters. In a review, press **Space** to reveal and **1–4** to rate.
@@ -37,6 +41,7 @@ From the folder containing `index.html`, run `python3 -m http.server 8000` and o
 - Letter names follow the Georgian script reference in the [Georgian Label Generation Rules proposal](https://www.icann.org/en/system/files/files/proposal-georgian-lgr-24nov16-en.pdf).
 - Latin spellings use the [Georgian national romanization system](https://assets.publishing.service.gov.uk/media/67990616636f8db3c2707143/ROMANIZATION_OF_GEORGIAN_Jan_25.pdf). Apostrophes distinguish ejective consonants, as in *k* and *k'*.
 - Pronunciation references include Ryan Shosted and Vakhtang Chikovani’s [Standard Georgian](https://doi.org/10.1017/S0025100306002659) and Tamar Makharoblidze’s [Basic Georgian](https://eprints.iliauni.edu.ge/3035/1/Basic-Georgian%202%20bolo%20versia.pdf).
-- The 33 letter recordings come from [Alphabet Learner](https://github.com/noBloodOnTheLeaves/alphabet_learner). Attribution and the Apache 2.0 license are in `audio/`. Each clip plays an individual letter sound. The example words have written readings.
+- The 33 letter recordings come from [Alphabet Learner](https://github.com/noBloodOnTheLeaves/alphabet_learner). Attribution and the Apache 2.0 license are in `audio/`. Each clip plays an individual letter sound.
+- The 33 whole words use a synthesized Georgian voice. Their pronunciations and credits are in `audio/words/`. Both sets of audio are bundled for offline use.
 - The Georgian glyphs use a subset of DejaVu Sans. The font license is in `fonts/LICENSE.txt`.
 

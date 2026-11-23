@@ -6,7 +6,8 @@
     esc,
     title,
     number,
-    idx
+    idx,
+    wordSoundButton
   } = UI;
   const {
     byGlyph,
@@ -123,7 +124,7 @@
     if (build) {
       const slots = [...c.word].map((_, i) => `<button class="slot" ${run.feedback!==null||run.picks[i]===undefined?'disabled':''} data-game-remove="${i}" aria-label="Remove tile ${i+1}"><span lang="ka">${run.picks[i]===undefined?'':run.tiles[run.picks[i]]}</span></button>`).join('');
       const tiles = run.tiles.map((glyph, i) => `<button class="letter-key" data-game-tile="${i}" ${run.feedback!==null||run.picks.includes(i)||run.picks.length>=c.word.length?'disabled':''} lang="ka">${glyph}</button>`).join('');
-      play = `<p class="prompt">Build the Georgian word for <b>${esc(c.meaning)}</b>.</p><strong class="word-reading">${esc(c.reading)}</strong><div class="slots">${slots}</div><div class="tile-tray">${tiles}</div>${run.feedback===null?`<div class="button-row"><button class="primary" data-game-act="check" ${run.picks.length===c.word.length?'':'disabled'}>Check word</button><button class="soft-btn" data-game-act="hint" ${run.hint?'disabled':''}>${run.hint?'Hint used':'Show hint'}</button></div>${run.hint?`<p class="hint">The first letter is <b lang="ka">${c.glyph}</b> (${esc(c.latin)}).</p>`:''}`:''}`;
+      play = `<p class="prompt">Build the Georgian word for <b>${esc(c.meaning)}</b>.</p><div class="game-word"><strong class="word-reading">${esc(c.reading)}</strong>${wordSoundButton(c)}</div><div class="slots">${slots}</div><div class="tile-tray">${tiles}</div>${run.feedback===null?`<div class="button-row"><button class="primary" data-game-act="check" ${run.picks.length===c.word.length?'':'disabled'}>Check word</button><button class="soft-btn" data-game-act="hint" ${run.hint?'disabled':''}>${run.hint?'Hint used':'Show hint'}</button></div>${run.hint?`<p class="hint">The first letter is <b lang="ka">${c.glyph}</b> (${esc(c.latin)}).</p>`:''}`:''}`;
     } else {
       const options = run.choices.map((o, i) => `<button class="option ${sprint?'option-glyph':''} ${run.feedback!==null?(o===c?'correct':o===run.selected?'incorrect':''):''}" data-game-answer="${i}" ${run.feedback!==null?'disabled':''}><small>${i+1}</small><b ${sprint?'lang="ka"':''}>${sprint?o.glyph:esc(o.latin)}</b></button>`).join('');
       play = `<p class="prompt">${sprint?'Which Georgian letter makes this sound?':'Which sound does this letter make?'}</p><div class="quiz-glyph" ${sprint?'':'lang="ka"'}>${sprint?esc(c.latin):c.glyph}</div><div class="options">${options}</div>`;

@@ -1,5 +1,6 @@
 (() => {
   const paths = {
+    sounds: '<path d="M3 10v4m4-8v12m5-16v20m5-16v12m4-8v4"/>',
     desk: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16m0-10h12"/>',
     alphabet: '<path d="M4 5h5c2 0 3 1 3 2 0-1 1-2 3-2h5v14h-5c-1.5 0-2 .4-3 1.5-1-1.1-1.5-1.5-3-1.5H4zM12 7v13"/>',
     games: '<path d="M7.5 7.5a4 4 0 0 0-4 3.2l-1.2 5.7c-.6 2.6 2 3.9 3.7 2.1l2.5-2.6h7l2.5 2.6c1.7 1.8 4.3.5 3.7-2.1l-1.2-5.7a4 4 0 0 0-4-3.2zM7.5 10v4.5m-2.2-2.2h4.4m5.9-.9h.1m2 2h.1"/>',
@@ -30,7 +31,7 @@
     info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/>'
   };
   const icon = (key, size = 20) => `<svg class="icon" aria-hidden="true" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${paths[key]||''}</svg>`;
-  const menu = [['desk', 'Study desk'], ['alphabet', 'Alphabet'], ['games', 'Games'], ['progress', 'Progress']];
+  const menu = [['desk', 'Study desk'], ['alphabet', 'Alphabet'], ['sounds', 'Sound lab'], ['games', 'Games'], ['progress', 'Progress']];
   const games = {
     match: {
       name: 'Letter match',
@@ -74,12 +75,25 @@
   };
   const soundButton = g => `<button class="sound square" data-sound="${g}" aria-label="Hear ${esc(Study.byGlyph.get(g).name)} pronounced" title="Hear letter pronunciation">${icon('sound',18)}</button>`;
 
+  function wordSoundButton(card) {
+    return `<button type="button" class="word-sound" data-word-sound="${card.glyph}" aria-label="Hear the whole word ${esc(card.word)}, ${esc(card.meaning)}">${icon('sound', 16)}Hear word</button>`;
+  }
+
+  function memoryCue(card, hint = false) {
+    const cue = MNEMONICS[card.glyph];
+    const picture = mnemonicPicture(card.glyph);
+    const scene = `<div class="memory-scene">${picture}<div><h3>${esc(cue.anchor)}</h3><p>${esc(cue.story)}</p></div></div>`;
+    if (hint) return `<details class="memory-hint"><summary>Show a memory hint</summary>${scene}</details>`;
+    return `<section class="memory-cue"><span class="kicker">${icon('star', 13)} Memory cue</span>${scene}</section>`;
+  }
+
   function wordExample(c) {
     const tiles = [...c.word].map(glyph => {
       const letter = Study.byGlyph.get(glyph);
       return `<button class="decode-tile" data-sound="${glyph}" title="Hear ${esc(letter.name)}" aria-label="Hear ${esc(letter.name)}, ${esc(letter.latin)}"><strong lang="ka">${glyph}</strong><small>${esc(letter.latin)}</small></button>`;
     }).join('');
-    return `<div class="example"><span class="example-img" aria-hidden="true">${emoji[idx(c.glyph)]||icon('alphabet',30)}</span><div><span class="kicker">Example word</span><strong lang="ka"><b>${c.word[0]}</b>${c.word.slice(1)}</strong><span class="example-trans">${esc(c.reading)} <i>·</i> ${esc(c.meaning)}</span><details class="decode"><summary>Read letter by letter</summary><div class="decode-row">${tiles}</div></details></div></div>`;
+    const nativeLink = c.word === 'მთა' ? '<a class="native-sample" href="https://commons.wikimedia.org/wiki/File:Ka-მთა-Nicodene-mom.ogg" target="_blank" rel="noopener">Native speaker on Wikimedia</a>' : '';
+    return `<div class="example"><span class="example-img" aria-hidden="true">${emoji[idx(c.glyph)]||icon('alphabet',30)}</span><div><span class="kicker">Example word</span><div class="example-word"><strong lang="ka"><b>${c.word[0]}</b>${c.word.slice(1)}</strong>${wordSoundButton(c)}</div><span class="example-trans">${esc(c.reading)} <i>·</i> ${esc(c.meaning)}</span><details class="decode"><summary>Read letter by letter</summary><div class="decode-row">${tiles}</div></details>${nativeLink}</div></div>`;
   }
   const title = (heading, sub, side = '') => `<div class="page-title"><div><h1>${heading}</h1><p>${sub}</p></div>${side}</div>`;
   const glyphCard = c => `<button class="glyph-tile" data-letter="${c.glyph}" aria-label="Explore ${esc(c.name)}, ${esc(c.latin)}"><span class="tile-top"><small>${number(idx(c.glyph)+1)}</small><i class="status-dot ${Study.status(c.glyph).toLowerCase()}" title="${Study.status(c.glyph)}"></i></span><b lang="ka">${c.glyph}</b><span>${esc(c.latin)}</span></button>`;
@@ -94,6 +108,8 @@
     gameCard,
     soundButton,
     wordExample,
+    wordSoundButton,
+    memoryCue,
     title,
     glyphCard
   };
