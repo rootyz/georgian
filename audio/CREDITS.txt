@@ -1,0 +1,17 @@
+Georgian letter pronunciations
+
+The 33 clips are adapted from the letter recordings in alphabet_learner by
+noBloodOnTheLeaves (Igor). The original project distributes them under the
+Apache License, Version 2.0. See LICENSE.txt in this directory.
+
+Original audio and exact source revision
+https://github.com/noBloodOnTheLeaves/alphabet_learner/tree/4d036715350fdeba020bbcd7b9148140d4c0ea0c/public/audio
+
+For this edition the original Ogg Vorbis clips were converted to mono
+32 kHz, 80 kbps MP3 and named by modern Georgian alphabet position. Each
+original filename is the corresponding Georgian letter followed by .ogg.
+
+01 ა    02 ბ    03 გ    04 დ    05 ე    06 ვ    07 ზ    08 თ    09 ი
+10 კ    11 ლ    12 მ    13 ნ    14 ო    15 პ    16 ჟ    17 რ    18 ს
+19 ტ    20 უ    21 ფ    22 ქ    23 ღ    24 ყ    25 შ    26 ჩ    27 ც
+28 ძ    29 წ    30 ჭ    31 ხ    32 ჯ    33 ჰ

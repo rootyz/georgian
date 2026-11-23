@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f8f7f3">
+  <meta name="description" content="Learn the Georgian alphabet with daily flashcards, pronunciation, and three practice games.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Anbani · Georgian alphabet studio</title>
+  <link rel="icon" href="./icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./icons/apple-touch.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./data.js"></script>
+  <script defer src="./study.js"></script>
+  <script defer src="./interface.js"></script>
+  <script defer src="./games.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <a href="#content" class="skip">Skip to content</a>
+  <header class="mast"><div class="mast-inner">
+    <a class="brand" href="#desk" aria-label="Anbani study desk"><span class="brand-mark" lang="ka">ა</span><span>Anbani<span class="brand-dot">.</span></span></a>
+    <nav id="navigation" aria-label="Main navigation"></nav>
+    <div class="head-tools"><a class="streak" href="#progress" id="streak"></a><button class="square" id="settings" aria-label="Study settings"></button></div>
+  </div></header>
+  <main id="content" tabindex="-1"></main>
+  <footer><span><span class="foot-mark" lang="ka">ა</span> Anbani <span class="footer-sep">/</span> Georgian alphabet studio</span><span lang="ka">ქართული ანბანი</span></footer>
+  <dialog id="dialog" aria-label="Study settings or letter details"><div id="dialog-content"></div></dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <noscript>Enable JavaScript to use the flashcards and games.</noscript>
+</body>
+</html>
+
