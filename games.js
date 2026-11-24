@@ -7,7 +7,8 @@
     title,
     number,
     idx,
-    wordSoundButton
+    wordSoundButton,
+    memoryCue
   } = UI;
   const {
     byGlyph,
@@ -36,6 +37,7 @@
   function intro(id) {
     stop();
     gameId = id;
+    if (id === 'signs') return SignReader.intro();
     poolChoice = 'starter';
     const g = games[id];
     return `${title('Practice arcade','Choose a challenge and put your letters to work.')}<div class="game-stage"><div class="stage-art ${g.color}"><img src="./art/${g.art}.webp" alt=""></div><div class="stage-body"><span class="kicker"><i class="mini-dot ${g.color}"></i>${g.tag}</span><h2>${g.name}</h2>
@@ -192,7 +194,7 @@
       if (gameId === 'names') {
         play = `<p class="prompt">Which Georgian letter is called</p><h2 class="shape-clue">${esc(c.name)}?</h2><div class="options">${options}</div>`;
       } else if (gameId === 'shape') {
-        play = `<p class="prompt">Which letter looks like this?</p><h2 class="shape-clue">${esc(MNEMONICS[c.glyph].letterAnchor)}</h2><div class="options">${options}</div>`;
+        play = `<p class="prompt">Which letter looks like this?</p><h2 class="shape-clue">${esc(Study.letterMnemonic(c.glyph).letterAnchor)}</h2><div class="options">${options}</div>`;
       } else if (gameId === 'missing') {
         const masked = [...c.word].map((g,i)=>i===run.blankPosition?'＿':g).join('');
         play = `<p class="prompt">Which letter completes the word for <strong>${esc(c.meaning)}</strong>?</p><div class="missing-word" lang="ka">${masked}</div><p class="missing-reading">${esc(c.reading)}</p><div class="options">${options}</div>`;
@@ -208,7 +210,7 @@
       }
       fb = `<div class="feedback ${run.feedback?'yes':'no'}" role="status"><span>${icon(run.feedback?'check':'info',19)} ${run.feedback ? 'Correct!' : gameId === 'names' ? '' : 'Answer'} ${answer}</span><button class="secondary small" data-game-act="next">${!sprint&&run.total>=run.limit?'See results':'Next'}</button></div>`;
     }
-    root().innerHTML = `<div class="action-heading"><a class="text-link" href="#games">${icon('back',16)} Arcade</a><span>${g.name}</span></div><section class="question-panel"><div class="panel-top"><span class="kicker"><i class="mini-dot ${g.color}"></i>${sprint?'Speed round':`Round ${Math.min(run.limit,run.total+(run.feedback===null?1:0))} of ${run.limit}`}</span><span class="round-stat">${sprint?`${icon('time',16)} <b id="clock">${Math.max(0,Math.ceil((run.deadline-performance.now())/1000))}s</b><i>·</i>`:''} ${run.score} correct</span></div><div class="question-body">${play}${fb}${run.feedback!==null && gameId==='missing' ? `<div class="matched-audio">${wordSoundButton(c)}</div>` : ''}${run.feedback!==null && gameId==='shape' ? `<p class="cue">${esc(MNEMONICS[c.glyph].letterCue)}</p>` : ''}</div></section>`;
+    root().innerHTML = `<div class="action-heading"><a class="text-link" href="#games">${icon('back',16)} Arcade</a><span>${g.name}</span></div><section class="question-panel"><div class="panel-top"><span class="kicker"><i class="mini-dot ${g.color}"></i>${sprint?'Speed round':`Round ${Math.min(run.limit,run.total+(run.feedback===null?1:0))} of ${run.limit}`}</span><span class="round-stat">${sprint?`${icon('time',16)} <b id="clock">${Math.max(0,Math.ceil((run.deadline-performance.now())/1000))}s</b><i>·</i>`:''} ${run.score} correct</span></div><div class="question-body">${play}${fb}${run.feedback!==null && gameId==='missing' ? `<div class="matched-audio">${wordSoundButton(c)}</div>` : ''}${run.feedback!==null && gameId==='shape' ? memoryCue(c) : ''}</div></section>`;
   }
 
   function respond(correct) {
@@ -228,6 +230,7 @@
 
   function click(el) {
     const act = el.dataset.gameAct;
+    if (gameId === 'signs') { SignReader.click(act); return; }
     if (act === 'start' || act === 'replay') {
       start();
       return;

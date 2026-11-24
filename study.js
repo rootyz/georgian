@@ -6,12 +6,14 @@
   if (new Set(intros).size !== deck.length) throw Error('Incomplete introduction order');
   const MINUTE = 60000;
   const DAY = 86400000;
+  const cueLimits = {shape: 180, sound: 300};
   const key = 'anbani.v1:' + new URL('./', location.href).pathname;
   const blank = () => ({
     version: 1,
     cards: {},
     activity: {},
     best: {},
+    mnemonics: {},
     goal: 5
   });
   const day = (value = Date.now()) => {
@@ -34,7 +36,16 @@
     for (const [d, v] of Object.entries(s.activity)) {
       if (!dateKey(d) || !v || ![v.reviews, v.games].every(n => Number.isSafeInteger(n) && n >= 0)) return false;
     }
-    return Object.entries(s.best).every(([k, v]) => ['match', 'build', 'sprint', 'shape', 'missing', 'pairs', 'names'].includes(k) && Number.isSafeInteger(v) && v >= 0);
+    if (s.mnemonics !== undefined) {
+      if (s.mnemonics === null || typeof s.mnemonics !== 'object' || Array.isArray(s.mnemonics)) return false;
+      for (const [g, cue] of Object.entries(s.mnemonics)) {
+        if (!byGlyph.has(g) || !cue || typeof cue !== 'object' || Array.isArray(cue)) return false;
+        const entries = Object.entries(cue);
+        if (!entries.length || entries.some(([field, value]) =>
+          !Object.hasOwn(cueLimits, field) || typeof value !== 'string' || !value.trim() || value.length > cueLimits[field])) return false;
+      }
+    }
+    return Object.entries(s.best).every(([k, v]) => ['match', 'build', 'sprint', 'shape', 'missing', 'pairs', 'names', 'signs'].includes(k) && Number.isSafeInteger(v) && v >= 0);
   }
   let storageOK = true;
 
@@ -105,6 +116,7 @@
   }
 
   function rate(g, grade, now = Date.now()) {
+    sync();
     const old = state.cards[g],
       gap = interval(g, grade);
     state.cards[g] = {
@@ -118,6 +130,7 @@
   }
 
   function gameFinished(id, score) {
+    sync();
     activity().games++;
     state.best[id] = Math.max(state.best[id] || 0, score);
     write();
@@ -131,6 +144,33 @@
       offset--;
     }
     return days;
+  }
+  function letterMnemonic(glyph) {
+    const builtIn = MNEMONICS[glyph];
+    const custom = state.mnemonics?.[glyph];
+    return {
+      letterAnchor: custom?.shape ?? builtIn.letterAnchor,
+      letterCue: custom?.shape ? '' : builtIn.letterCue,
+      soundLink: custom?.sound ?? builtIn.soundLink,
+      customShape: Boolean(custom?.shape),
+      personal: Boolean(custom)
+    };
+  }
+
+  function setMnemonic(glyph, shape, sound) {
+    if (!byGlyph.has(glyph) || typeof shape !== 'string' || typeof sound !== 'string') return false;
+    shape = shape.trim();
+    sound = sound.trim();
+    if (shape.length > cueLimits.shape || sound.length > cueLimits.sound) return false;
+    sync();
+    const builtIn = MNEMONICS[glyph], custom = {};
+    if (shape && shape !== builtIn.letterAnchor) custom.shape = shape;
+    if (sound && sound !== builtIn.soundLink) custom.sound = sound;
+    state.mnemonics ||= {};
+    if (Object.keys(custom).length) state.mnemonics[glyph] = custom;
+    else delete state.mnemonics[glyph];
+    write();
+    return true;
   }
 
   function shuffle(values) {
@@ -149,6 +189,9 @@
       return storageOK;
     },
     byGlyph,
+    cueLimits,
+    letterMnemonic,
+    setMnemonic,
     intros,
     day,
     dayOffset,
@@ -164,6 +207,7 @@
     key,
     setGoal(n) {
       if ([3, 5, 8, 12].includes(n)) {
+        sync();
         state.goal = n;
         write();
       }

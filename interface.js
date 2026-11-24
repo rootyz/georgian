@@ -33,6 +33,7 @@
   const icon = (key, size = 20) => `<svg class="icon" aria-hidden="true" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${paths[key]||''}</svg>`;
   const menu = [['desk', 'Study desk'], ['alphabet', 'Alphabet'], ['sounds', 'Sound lab'], ['games', 'Games'], ['progress', 'Progress']];
   const games = {
+    signs: {name:'Street Sign Reader', desc:'Read Georgian shop signs and destinations aloud.', icon:'pin', tag:'Reading', art:'signs', color:'mint'},
     names: {
       name: 'Letter names',
       desc: 'See a name like Bani. Find its Georgian letter.',
@@ -95,14 +96,16 @@
     return `<button type="button" class="word-sound" data-word-sound="${card.glyph}" aria-label="Hear the whole word ${esc(card.word)}, ${esc(card.meaning)}">${icon('sound', 16)}Hear word</button>`;
   }
 
-  function memoryCue(card, hint = false) {
-    const cue = MNEMONICS[card.glyph];
-    const picture = mnemonicPicture(card.glyph);
+  function memoryCue(card, hint = false, editable = false) {
+    const cue = Study.letterMnemonic(card.glyph);
+    const picture = cue.customShape ? '' : mnemonicPicture(card.glyph);
+    const explanation = cue.letterCue ? `<p>${esc(cue.letterCue)}</p>` : '';
+    const editButton = editable ? `<button type="button" class="cue-edit" data-edit-cue="${card.glyph}">${icon('edit',14)}Edit mnemonic</button>` : '';
     if (hint) {
-      return `<details class="memory-hint"><summary>Show a letter-shape hint</summary><div class="memory-scene">${picture}<h3>${esc(cue.letterAnchor)}</h3></div></details>`;
+      return `<details class="memory-hint"><summary>Show a letter-shape hint</summary><div class="memory-scene">${picture}<div><h3>${esc(cue.letterAnchor)}</h3>${explanation}</div></div></details>`;
     }
-    return `<section class="memory-cue letter-memory"><span class="kicker">${icon('star', 13)} Letter mnemonic</span>
-      <div class="memory-scene">${picture}<div><h3>${esc(cue.letterAnchor)}</h3><p>${esc(cue.letterCue)}</p></div></div></section>`;
+    return `<section class="memory-cue letter-memory"><span class="kicker">${icon('star', 13)} ${cue.personal?'My mnemonic':'Letter mnemonic'}</span>
+      <div class="memory-scene">${picture}<div><h3>${esc(cue.letterAnchor)}</h3>${explanation}<p class="sound-link"><strong>Sound link</strong> ${esc(cue.soundLink)}</p></div></div>${editButton}</section>`;
   }
 
   function wordMnemonic(card) {
