@@ -1,11 +1,11 @@
 // Increment the version whenever the bundled app or content changes.
-importScripts('./recordings.js', './speaker-audio.js');
+importScripts('./recordings.js', './sign-recordings.js', './speaker-audio.js');
 const prefix = `anbani:${self.registration.scope}:`;
-const cacheName = `${prefix}1.4.0`;
+const cacheName = `${prefix}1.5.0`;
 const files = [
-  './recordings.js', './speaker-audio.js', './vocabulary.js', './audio/SPEAKERS.txt', './index.html', './style.css', './data.js', './study.js', './interface.js', './mnemonics.js', './sound-guides.js', './sound-lab.js', './games.js', './app.js', './manifest.webmanifest',
+  './recordings.js', './speaker-audio.js', './vocabulary.js', './audio/SPEAKERS.txt', './index.html', './style.css', './data.js', './study.js', './interface.js', './mnemonics.js', './sound-guides.js', './sound-lab.js', './games.js', './street-signs.js', './sign-recordings.js', './app.js', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png', './icons/apple-touch.png',
-  './art/landscape.webp', './art/match.webp', './art/build.webp', './art/sprint.webp', './art/shape.webp', './art/missing.webp', './art/pairs.webp', './art/names.webp', './fonts/georgian.ttf',
+  './art/landscape.webp', './art/match.webp', './art/build.webp', './art/sprint.webp', './art/shape.webp', './art/missing.webp', './art/pairs.webp', './art/names.webp', './art/signs.webp', './fonts/georgian.ttf',
   './audio/CREDITS.txt', './audio/LICENSE.txt', './audio/words/CREDITS.txt',
   ...Array.from({ length: 33 }, (_, index) => {
     const file = String(index + 1).padStart(2, '0') + '.mp3';
@@ -57,7 +57,7 @@ self.addEventListener('fetch', event => {
     const voiceRoot = new URL('./speakers/', self.registration.scope);
     if (url.pathname.startsWith(voiceRoot.pathname)) {
       const id = /^(\d+)\.(wav|ogg|mp3)$/.exec(url.pathname.slice(voiceRoot.pathname.length));
-      const recording = id && RECORDINGS.find(item => item.cardNumber === Number(id[1]));
+      const recording = id && [...RECORDINGS, ...SIGN_RECORDINGS].find(item => item.cardNumber === Number(id[1]));
       if (!recording) return new Response(null, {status: 404});
       try {
         const voice = await SpeakerAudio.load(self.registration.scope, recording, id[2] === 'mp3');
