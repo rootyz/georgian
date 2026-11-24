@@ -24,6 +24,7 @@
     poolChoice = 'starter';
 
   function stop() {
+    RecallGames.stop();
     clearInterval(timer);
     timer = null;
     run = null;
@@ -37,6 +38,8 @@
   function intro(id) {
     stop();
     gameId = id;
+    if (id === 'write' || id === 'dictation') return RecallGames.intro(id);
+    if (id === 'duel') return LookalikeDuel.intro();
     if (id === 'signs') return SignReader.intro();
     poolChoice = 'starter';
     const g = games[id];
@@ -230,6 +233,7 @@
 
   function click(el) {
     const act = el.dataset.gameAct;
+    if (gameId === 'duel') { LookalikeDuel.click(el); return; }
     if (gameId === 'signs') { SignReader.click(act); return; }
     if (act === 'start' || act === 'replay') {
       start();
@@ -269,6 +273,7 @@
   }
 
   function shortcut(key) {
+    if (gameId === 'duel') return LookalikeDuel.shortcut(key);
     if (!run || run.ended || (gameId === 'build' || gameId === 'pairs') || run.feedback !== null || !['1', '2', '3', '4'].includes(key)) return false;
     document.querySelector(`[data-game-answer="${Number(key)-1}"]`)?.click();
     return true;

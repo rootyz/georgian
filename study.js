@@ -45,7 +45,7 @@
           !Object.hasOwn(cueLimits, field) || typeof value !== 'string' || !value.trim() || value.length > cueLimits[field])) return false;
       }
     }
-    return Object.entries(s.best).every(([k, v]) => ['match', 'build', 'sprint', 'shape', 'missing', 'pairs', 'names', 'signs'].includes(k) && Number.isSafeInteger(v) && v >= 0);
+    return Object.entries(s.best).every(([k, v]) => ['match', 'build', 'sprint', 'shape', 'missing', 'pairs', 'names', 'signs', 'duel', 'write', 'dictation'].includes(k) && Number.isSafeInteger(v) && v >= 0);
   }
   let storageOK = true;
 

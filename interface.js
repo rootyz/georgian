@@ -33,6 +33,11 @@
   const icon = (key, size = 20) => `<svg class="icon" aria-hidden="true" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${paths[key]||''}</svg>`;
   const menu = [['desk', 'Study desk'], ['alphabet', 'Alphabet'], ['sounds', 'Sound lab'], ['games', 'Games'], ['progress', 'Progress']];
   const games = {
+    write: {name:'Write from Memory', desc:'Draw a Georgian letter from its name or sound.', icon:'edit', tag:'Handwriting', art:'write', color:'mint',
+      instructions:'Draw on the blank pad, then compare your writing with the printed letter and rate your recall.'},
+    dictation: {name:'Spell What You Hear', desc:'Listen to a speaker and spell the word with letter tiles.', icon:'sounds', tag:'Dictation', art:'dictation', color:'lilac',
+      instructions:'Listen to the whole word. Build its spelling from the tiles, then check your answer. Replay the recording as often as you like.'},
+    duel: {name:'Look-alike Duel', desc:'Tell two similar letters apart by a single stroke.', icon:'tiles', tag:'Letter shapes', art:'duel', color:'sky'},
     signs: {name:'Street Sign Reader', desc:'Read Georgian shop signs and destinations aloud.', icon:'pin', tag:'Reading', art:'signs', color:'mint'},
     names: {
       name: 'Letter names',

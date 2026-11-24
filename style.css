@@ -2748,3 +2748,45 @@ dialog details a {
 .sign-recap {max-width:28rem;margin:1rem auto;text-align:left;}
 .sign-recap ul {list-style:none;padding:0;}
 .sign-recap li {display:flex;align-items:baseline;justify-content:space-between;gap:.7rem;border-bottom:1px solid var(--line);padding:.4rem 0;}
+
+/* Keep the two glyphs on the same baseline for a direct visual comparison. */
+.duel-prompt {margin: .25rem 0 .65rem; font-size: clamp(1.85rem, 6vw, 2.6rem)}
+.duel-prompt span {color: var(--muted); font-weight: 450}
+.duel-prompt:focus {outline: none}
+.duel-listen {margin: 0 auto 1rem}
+.duel-focus {margin: .2rem 0 .75rem; font-size: 1.05rem}
+.duel-options {max-width: 32rem; margin: 0 auto; align-items: start}
+.duel-column {min-width: 0}
+.duel-tile {width: 100%; min-height: 7.25rem}
+.duel-tile b {font-size: clamp(3rem, 10vw, 4.4rem); line-height: 1.4; font-weight: 400}
+.duel-letter-label {display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: .35rem; margin: .75rem 0 .25rem}
+.duel-clue {text-align: left; margin: .35rem .15rem .25rem; font-size: .95rem; line-height: 1.5}
+.duel-examples {margin: 1rem 0 0; text-align: left}
+.duel-examples summary {cursor: pointer; font-weight: 600}
+.duel-examples > div {display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .4rem; padding: .6rem 0; border-bottom: 1px solid var(--line)}
+
+.recall-prompt { margin: .1rem 0 .7rem; font-size: clamp(1.65rem, 5.5vw, 2.45rem); line-height: 1.2 }
+.recall-prompt span { color: var(--muted); font-weight: 450 }
+.recall-prompt:focus { outline: none }
+.recall-listen { margin: 0 auto .6rem }
+.recall-audio-status { color: var(--muted); font-size: .9rem }
+.recall-audio-status:not(:empty) { margin: .4rem auto }
+.recall-help { color: var(--muted); font-size: .9rem; margin: .65rem 0 }
+.writing-pads { display: grid; grid-template-columns: minmax(0, 15rem); gap: .75rem; justify-content: center; margin: 1rem auto .5rem }
+.writing-pads.comparing { grid-template-columns: repeat(2,minmax(0,15rem)) }
+.writing-pads figure { margin: 0; min-width: 0 }
+.writing-pads figcaption { font-weight: 650; font-size: .9rem; margin-bottom: .35rem }
+.writing-square { position: relative; aspect-ratio: 1; border: 1px solid var(--line); border-radius: 12px; overflow: hidden }
+.writing-square canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair }
+.comparing canvas { cursor: default }
+.model-letter { display: grid; place-items: center; font-size: clamp(3.4rem, 15vw, 7.5rem); line-height: 1 }
+.writing-tools { display: flex; justify-content: center; gap: .4rem; margin: .35rem 0 .8rem }
+.recall-body [hidden] { display: none }
+.write-response p { margin: .7rem 0 }
+.recall-memory { text-align: left; margin-top: 1rem }
+.recall-memory summary { cursor: pointer; font-weight: 600 }
+.spell-work { margin: .85rem auto }
+.spell-work .tile-tray { margin: .9rem auto 1.2rem }
+.spell-answer { display: grid; gap: .2rem; margin: .8rem auto }
+.spell-answer b { font-size: clamp(1.65rem, 6vw, 2.65rem); font-weight: 450; word-break: break-word }
+.spell-answer span { color: var(--muted) }

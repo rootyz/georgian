@@ -1,11 +1,13 @@
 // Increment the version whenever the bundled app or content changes.
 importScripts('./recordings.js', './sign-recordings.js', './speaker-audio.js');
 const prefix = `anbani:${self.registration.scope}:`;
-const cacheName = `${prefix}1.5.0`;
+const cacheName = `${prefix}1.7.0`;
 const files = [
   './recordings.js', './speaker-audio.js', './vocabulary.js', './audio/SPEAKERS.txt', './index.html', './style.css', './data.js', './study.js', './interface.js', './mnemonics.js', './sound-guides.js', './sound-lab.js', './games.js', './street-signs.js', './sign-recordings.js', './app.js', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png', './icons/apple-touch.png',
-  './art/landscape.webp', './art/match.webp', './art/build.webp', './art/sprint.webp', './art/shape.webp', './art/missing.webp', './art/pairs.webp', './art/names.webp', './art/signs.webp', './fonts/georgian.ttf',
+  './art/landscape.webp', './art/match.webp', './art/build.webp', './art/sprint.webp', './art/shape.webp', './art/missing.webp', './art/pairs.webp', './art/names.webp', './art/signs.webp', './art/duel.webp', './duel.js', './ink-pad.js', './recall-games.js', './art/write.webp', './art/dictation.webp', './fonts/georgian.ttf',
+  './audio/dictation/CREDITS.txt', './audio/dictation/1001.mp3',
+  ...RECORDINGS.map(r => './audio/dictation/' + r.cardNumber + '.mp3'),
   './audio/CREDITS.txt', './audio/LICENSE.txt', './audio/words/CREDITS.txt',
   ...Array.from({ length: 33 }, (_, index) => {
     const file = String(index + 1).padStart(2, '0') + '.mp3';

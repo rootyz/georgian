@@ -84,7 +84,7 @@
       month: 'long'
     });
     return `${title('Study desk','Your personal workspace for the Georgian alphabet.',`<span class="date">${icon('cal',17)}${date}</span>`)}
-    <div class="desk-grid"><div class="desk-left">${hero()}<section class="arcade-section"><div class="section-head"><h2>Practice arcade</h2><a href="#games" class="text-link">All games</a></div><div class="game-grid">${['signs','names','shape'].map(gameCard).join('')}</div></section></div>
+    <div class="desk-grid"><div class="desk-left">${hero()}<section class="arcade-section"><div class="section-head"><h2>Practice arcade</h2><a href="#games" class="text-link">All games</a></div><div class="game-grid">${['write','dictation','duel'].map(gameCard).join('')}</div></section></div>
     <aside>${progressBox()}${spotlightBox()}</aside></div>
     <section class="shelf"><div class="section-head"><h2>Alphabet shelf</h2><a href="#alphabet" class="text-link">Explore all 33</a></div><div class="shelf-grid">${ALPHABET.slice(0,8).map(glyphCard).join('')}</div></section>`;
   }
@@ -102,7 +102,7 @@
   }
 
   function gamesPage() {
-    return `${title('Practice arcade','Practice letter names and shapes, word meanings, spelling, and speed.')}<div class="game-grid big-games">${Object.keys(games).map(gameCard).join('')}</div>`;
+    return `${title('Practice arcade','Practice handwriting, listening, letter shapes, and spelling.')}<div class="game-grid big-games">${Object.keys(games).map(gameCard).join('')}</div>`;
   }
 
   function weekly() {
@@ -187,19 +187,21 @@
   function play(g, kind = 'letter') {
     const card = S.byGlyph.get(g);
     if (!card) return;
-    audio?.pause();
     const human = kind === 'word';
     const source = human ? SpeakerAudio.urlFor(card.recording) :
       (kind === 'original' ? './audio/words/' : './audio/') + number(idx(g) + 1) + '.mp3';
     playClip(source,human);
   }
 
-  function playClip(source, human) {
+  function playClip(source, human, quiet = false) {
+    audio?.pause();
     const clip = new Audio(source);
     audio = clip;
-    clip.play().catch(error => {
-      if (clip !== audio || error.name === 'AbortError') return;
-      toast(human ? 'Recording unavailable. Try again online or open the speaker’s source link.' : 'Audio could not play. Check your audio output and try again.');
+    return clip.play().then(() => clip === audio).catch(error => {
+      if (!quiet && clip === audio && error.name !== 'AbortError') {
+        toast(human ? 'Recording unavailable. Try again online or open the speaker’s source link.' : 'Audio could not play. Check your audio output and try again.');
+      }
+      return false;
     });
   }
 
@@ -259,40 +261,7 @@
   function trace() {
     const c = S.byGlyph.get(selectedLetter);
     openDialog(`<div class="modal-head"><span class="kicker">Handwriting practice</span>${closeBtn}</div><h2>Trace ${esc(c.name)}</h2><p class="muted">Use your finger, stylus, or mouse to follow the letter.</p><div class="trace-pad grid-paper"><span lang="ka">${c.glyph}</span><canvas id="trace" aria-label="Drawing surface for ${esc(c.name)}"></canvas></div><div class="detail-bottom"><button class="secondary" data-act="detail-back">Letter details</button><button class="soft-btn" data-act="clear">Clear ink</button></div>`);
-    const cv = $('#trace'),
-      ctx = cv.getContext('2d');
-    let pointer = null;
-    const rect = cv.getBoundingClientRect(),
-      dpr = window.devicePixelRatio || 1;
-    cv.width = Math.round(rect.width * dpr);
-    cv.height = Math.round(rect.height * dpr);
-    ctx.scale(dpr, dpr);
-    ctx.strokeStyle = '#a93d1e';
-    ctx.lineWidth = 7;
-    ctx.lineCap = ctx.lineJoin = 'round';
-    const point = e => {
-      const b = cv.getBoundingClientRect();
-      return [(e.clientX - b.left) * rect.width / b.width, (e.clientY - b.top) * rect.height / b.height];
-    };
-    cv.onpointerdown = e => {
-      if (pointer !== null) return;
-      pointer = e.pointerId;
-      cv.setPointerCapture(pointer);
-      ctx.beginPath();
-      const [x, y] = point(e);
-      ctx.moveTo(x, y);
-      ctx.lineTo(x + .05, y);
-      ctx.stroke();
-    };
-    cv.onpointermove = e => {
-      if (e.pointerId === pointer) {
-        ctx.lineTo(...point(e));
-        ctx.stroke();
-      }
-    };
-    cv.onlostpointercapture = () => {
-      pointer = null;
-    };
+    InkPad.attach($('#trace'));
   }
 
   function settings() {
@@ -369,6 +338,11 @@
       return;
     }
     const ds = el.dataset;
+    if (['game/write','game/dictation'].includes(route) && (ds.recallAct || ds.letterTile !== undefined || ds.slot !== undefined)) {
+      if (['next','again','good','skip','menu','retry'].includes(ds.recallAct)) audio?.pause();
+      RecallGames.click(el, source => playClip(source, false, true));
+      return;
+    }
     if (ds.editCue) {
       editCue(ds.editCue);
       return;
@@ -378,7 +352,7 @@
       return;
     }
     if (ds.pairIndex !== undefined || ds.gameAct !== undefined || ds.gameAnswer !== undefined || ds.gameTile !== undefined || ds.gameRemove !== undefined) {
-      if (['next','pairs-next','replay','sign-again','sign-good','sign-retry','sign-menu'].includes(ds.gameAct)) audio?.pause();
+      if (['next','pairs-next','replay','sign-again','sign-good','sign-retry','sign-menu','duel-next','duel-retry','duel-menu'].includes(ds.gameAct)) audio?.pause();
       Arcade.click(el);
       return;
     }
@@ -487,6 +461,8 @@
   });
   document.addEventListener('change', e => {
     if (e.target.id === 'sound-lesson' && SoundLab.has(e.target.value)) location.hash = 'sounds/' + e.target.value;
+    if (['recall-pool','recall-prompt'].includes(e.target.id) && ['game/write','game/dictation'].includes(route)) RecallGames.change(e.target);
+    if (e.target.id === 'duel-set' && route === 'game/duel') LookalikeDuel.change(e.target.value);
     if (e.target.id === 'sign-pool' && route === 'game/signs') SignReader.choose(e.target.value);
     if (e.target.id === 'goal') {
       S.setGoal(Number(e.target.value));
