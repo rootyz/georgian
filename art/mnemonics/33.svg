@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 152">
+<rect width="220" height="152" rx="9" fill="#f5e7c7"/>
+<g transform="translate(15 0)">
+<!-- A laughing profile and the three scallops of its exhaled breath. -->
+<path d="M57 45q-10 1-14 10-4 9-1 18t2 14q0 12-6 25l19 6 13-13 1-9q10 1 13-6l1-6-7 1 7-8-6-1 4-3-7-9q-1-12-8-17z" fill="#e8bb87" stroke="#a67f56" stroke-width="1.65" stroke-linejoin="round"/>
+<path d="M39 77q-7-9-5-20 3-17 21-18 15-1 21 14 0 4-2 6l-6-7q-7 8-17 8l-1 10-5 6 1 8z" fill="#b57d56" stroke="#96724f" stroke-width="1.5"/>
+<path d="M39 59q3-11 12-14m-7 11q4-7 10-8" fill="none" stroke="#d5a16c" stroke-width="2" stroke-linecap="round"/>
+<path d="M45 108q9 3 15-4l3 1-4 12-12 3-11-7z" fill="#9aaf91" stroke="#80967e" stroke-width="1.35"/>
+<path d="M65 70q4-5 8-1" fill="none" stroke="#6f654d" stroke-width="1.9" stroke-linecap="round"/>
+<path d="M70 81q6 2 15-4-3 9-9 11-4-1-6-7z" fill="#99624d"/>
+<circle cx="64" cy="78" r="3" fill="#d89872"/>
+<!-- Each pale ribbon runs from the mouth into one of the glyph's bends. -->
+<path d="M85 77q16-10 18-25 1-10 7-17 14 1 19 9 5 12-8 17l-13-1q-5 11-23 17z" fill="#dfbf84"/>
+<path d="M89 80q12-8 23-14 10-5 16 3 7 10-4 16l-12 1q-9-7-23-6z" fill="#ecd19b"/>
+<path d="M87 84q12 1 22 8 10-4 18 2 10 7 5 18-3 11-15 14-16 4-25-9l5-4q12 8 16 2 3-5-3-11-11-12-23-20z" fill="#dcc08c"/>
+<path d="M91 77q12-8 15-16m-12 21 12 1m-14 5q10 4 13 9" stroke="#b89762" fill="none" stroke-width="1.5" stroke-linecap="round"/>
+<path fill="#283d34" d="M135.8 104.1Q135.8 129.5 110.3 129.5Q84.2 129.5 84.2 102.8L86.7 93.8H97.7L95.3 102.8Q95.3 120.9 109.9 120.9Q124.7 120.9 124.7 104.5Q124.7 91.1 117.8 90.9H107.8V83H117.8Q124 83 124 73.4Q124.1 65.5 117.8 65.5H107.8V57.4H117.7Q123.2 57.4 123.4 48.4Q123.4 41.8 111.7 37.2Q99.9 32.6 99.9 22.5H110.2Q110.2 27.8 122 32Q133.8 36.2 133.8 47.5Q133.8 57.3 123.8 61Q135 65.2 135 73.6Q135 82.5 124.2 86.9Q135.8 93.8 135.8 104.1Z"/>
+<path d="m140 42 5-3m-4 34 7-1m-6 32 5 3" fill="none" stroke="#ccab74" stroke-width="1.7" stroke-linecap="round"/>
+</g>
+</svg>

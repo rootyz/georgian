@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="152" viewBox="0 0 220 152">
+<rect width="220" height="152" rx="9" fill="#f5e7c7"/>
+<!-- The letter is a paved U-turn. The broad ochre shoulders make the route legible. -->
+<ellipse cx="111" cy="134" rx="59" ry="3.6" fill="#daca9f" opacity=".55"/>
+<path d="M91 88q-2 18 1 25 6 15 23 15 21-1 21-24V46q1-15-12-17" fill="none" stroke="#d1aa68" stroke-width="19" stroke-linecap="round"/>
+<path d="M152 53v47q0 22-17 32m-47-10q-7-7-8-18" fill="none" stroke="#c7b989" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"/>
+<path fill="#283d34" d="M140.4 102.4Q140.4 129.5 114.4 129.5Q85.9 129.5 85.9 102.4L87.5 87.7H99L97.5 102.4Q97.5 120.4 114.4 120.4Q129.4 120.4 129.4 102.4V46Q129.3 34.2 120.6 34.2Q112.6 34.2 112.6 43.3L111.9 65.7H102.7L102 43.3Q102 35.5 91.9 35.5H86.6L79.6 32.9L80.9 22.5L86.5 25.7H91.7Q100.9 25.7 106.1 37.8Q110.4 25.7 120.7 25.7Q140.4 25.7 140.4 46Z"/>
+<!-- The scooter is turning toward the open end of the road. -->
+<g transform="translate(88 88) rotate(-32)">
+<g fill="#405448" stroke="#344539" stroke-width="1.7"><circle cx="-30" cy="1" r="7"/><circle cx="0" cy="1" r="7"/></g>
+<g fill="#e5c68d"><circle cx="-30" cy="1" r="3"/><circle cx="0" cy="1" r="3"/></g>
+<path d="M-38-1q0-9 8-10h9q4 1 4 7h7l3-12 3-2 6 12q-5 0-8 5h-13q-8-4-19 0z" fill="#bd7656" stroke="#665842" stroke-width="2.1" stroke-linejoin="round"/>
+<path d="M-29-13h10" stroke="#415246" stroke-width="4.7" stroke-linecap="round"/>
+<path d="M-4-14l-4-9h5" stroke="#475b4b" stroke-width="2.9" fill="none" stroke-linejoin="round"/>
+<path d="M-5-22h5v4h-5z" fill="#e1ac61" stroke="#836a4d" stroke-width="1.6"/>
+</g>
+<path d="M140 83l-4 4-4-4" stroke="#d9bd7c" stroke-width="1.9" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

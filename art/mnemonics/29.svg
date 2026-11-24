@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 152">
+<rect width="220" height="152" rx="9" fill="#f5e7c7"/>
+
+<ellipse cx="110" cy="136" rx="44" ry="3.8" fill="#daca9f" opacity=".75"/>
+<!-- The body, neck and stopper of an old swing-top soda bottle. -->
+<path d="M92 46h24v12q-1 6 9 12c11 9 15 22 12 38-2 15-11 23-27 24-16 0-27-8-27-25V78q0-7 4-13l5-8z" fill="#b4c4a5" stroke="#8a9c7c" stroke-width="1.55"/>
+<path d="M94 82q10 3 18 0t17 1v20q-2 21-20 22-16 0-16-20z" fill="#82a38d"/>
+<path d="M94 82q9 3 18 0t17 1" fill="none" stroke="#d1dcbf" stroke-width="1.55"/>
+<path d="M95 48h20v8H94z" fill="#d3dac0"/>
+<path d="M88 43q14-5 30-1l1 7q-13 4-31 1z" fill="#bf7959" stroke="#9a694f" stroke-width="1.5"/>
+<path d="M91 41q5-10 14-10 10-1 13 10-11 5-27 4z" fill="#e3be80" stroke="#ae8756" stroke-width="1.35"/>
+<path d="m98 38 11-2" stroke="#f7deb0" stroke-width="2.5" stroke-linecap="round"/>
+<g fill="#d6e0c9"><circle cx="105" cy="111" r="3.2"/><circle cx="115" cy="102" r="2.2"/><circle cx="106" cy="93" r="2.45"/><circle cx="117" cy="75" r="2"/></g>
+<!-- Sparkling droplets fly away from the sprung wire. -->
+<path d="M129 22q6-11 12-12m-4 17q7-4 13-3" stroke="#ae8d58" fill="none" stroke-width="1.7" stroke-linecap="round"/>
+<path d="M146 14q4-9 8-8c5 2-2 9-8 8z" fill="#9ab3a1"/>
+<circle cx="156" cy="24" r="2.9" fill="#b2c4ab"/><circle cx="142" cy="6" r="1.8" fill="#b2c4ab"/>
+<path fill="#283d34" d="M83.4 39.3Q83.3 22.5 102.5 22.5Q112.5 22.5 117.6 33.8Q123 22.5 128.5 22.5H136.6V34.9L128.2 31.7Q120.5 31.7 120.5 39.5V44.9Q120.5 48.2 118.1 49.4Q115.7 50.6 113.6 49.4Q111.4 48.1 111.4 44.9V39.7Q111.4 30.5 103.5 30.5Q93.8 30.5 93.8 39.7V65.2Q101.6 60.8 109.2 60.8Q134.9 60.8 134.9 94.9Q134.9 129.5 106.1 129.5Q83.4 129.5 83.4 98.5ZM93.8 100.7Q93.8 120.9 107.6 120.9Q123.8 120.9 123.8 94.9Q123.8 69.4 109 69.4Q101.2 69.3 93.8 73.1Z"/>
+<path d="M129 85q2 9 0 15" fill="none" stroke="#f0eacb" stroke-width="2" stroke-linecap="round"/>
+
+</svg>

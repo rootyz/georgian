@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 152">
+<rect width="220" height="152" rx="9" fill="#f5e7c7"/>
+
+<ellipse cx="109" cy="135" rx="40" ry="3.3" fill="#daca9f" opacity=".68"/>
+<!-- The leaf grows from the stem carried by the tall stroke. -->
+<path d="M113 32q5-12 20-17 11-3 21-3-5 13-17 20-12 6-24 0z" fill="#94ab81" stroke="#768c68" stroke-width="1.4"/>
+<path d="M116 30q13-3 30-14m-12 9 1-6" fill="none" stroke="#6f8563" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M110 32q-7 8-11 21" fill="none" stroke="#998358" stroke-width="2.5" stroke-linecap="round"/>
+<!-- One cherry encircles the small left loop. -->
+<path d="M100 52q-7-5-15-2-12 5-10 19 2 17 15 23 6 3 11-1 8 4 15-3 10-10 7-24-1-11-11-13-6-2-12 1z" fill="#c87456" stroke="#9e634d" stroke-width="1.5"/>
+<path d="M77 67q0 17 14 23 6 2 10-1 7 4 13-1 8-7 9-19-4 11-11 13-6 3-11 1-6 3-13 0-7-4-11-16z" fill="#b85e48"/>
+<path d="M82 62q1-5 5-7" fill="none" stroke="#f1ba8f" stroke-width="3.3" stroke-linecap="round"/>
+<!-- A small ochre pit springs free. -->
+<path d="M65 66q-3-2-5-5-4-5-1-8 4-4 9 2 4 6 2 10-2 2-5 1z" fill="#cf995c" stroke="#ab7746" stroke-width="1.35"/>
+<path d="m61 55 6 8M73 61l-2-2m2 9-5-1m5 7-5 2" fill="none" stroke="#bb8d59" stroke-width="1.55" stroke-linecap="round"/>
+<path d="M97 103q-4 22 10 25 13 3 20-8 4-7 2-16" fill="none" stroke="#cfa65e" stroke-width="7.5" stroke-linecap="round"/>
+<path fill="#283d34" d="M109.5 22.5H117.7V52.2H131.3V58.6H117.7V62.3Q117.8 74.6 124.4 86.7Q131 98.9 131 109Q131 129.5 110.5 129.5Q89.8 129.5 89.7 109L91.3 97.7H99.9L98.6 109.5Q98.6 122.6 110.5 122.6Q122.2 122.6 122.2 108.9Q122.2 100.7 115.9 87.8Q109.6 74.9 109.5 62.3V58.6H105.3Q95.9 58.6 95.9 67.6Q95.9 75.7 103.5 75.7H105.8V82.3H103.5Q88.7 82.4 88.7 67.7Q88.7 52.2 105.5 52.2H109.5Z"/>
+<!-- A single bright glint inside the smaller loop. -->
+<path d="M100 66q1-4 4-4" fill="none" stroke="#f3c5a3" stroke-width="2.45" stroke-linecap="round"/>
+
+</svg>

@@ -1,7 +1,7 @@
 // Increment the version whenever the bundled app or content changes.
 importScripts('./recordings.js', './sign-recordings.js', './speaker-audio.js');
 const prefix = `anbani:${self.registration.scope}:`;
-const cacheName = `${prefix}1.7.0`;
+const cacheName = `${prefix}1.8.0`;
 const files = [
   './recordings.js', './speaker-audio.js', './vocabulary.js', './audio/SPEAKERS.txt', './index.html', './style.css', './data.js', './study.js', './interface.js', './mnemonics.js', './sound-guides.js', './sound-lab.js', './games.js', './street-signs.js', './sign-recordings.js', './app.js', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png', './icons/apple-touch.png',
@@ -10,8 +10,8 @@ const files = [
   ...RECORDINGS.map(r => './audio/dictation/' + r.cardNumber + '.mp3'),
   './audio/CREDITS.txt', './audio/LICENSE.txt', './audio/words/CREDITS.txt',
   ...Array.from({ length: 33 }, (_, index) => {
-    const file = String(index + 1).padStart(2, '0') + '.mp3';
-    return [`./audio/${file}`, `./audio/words/${file}`];
+    const id = String(index + 1).padStart(2, '0');
+    return [`./audio/${id}.mp3`, `./audio/words/${id}.mp3`, `./art/mnemonics/${id}.svg`];
   }).flat()
 ];
 const indexURL = new URL('./index.html', self.registration.scope).href;

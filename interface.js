@@ -103,14 +103,18 @@
 
   function memoryCue(card, hint = false, editable = false) {
     const cue = Study.letterMnemonic(card.glyph);
-    const picture = cue.customShape ? '' : mnemonicPicture(card.glyph);
+    const art = mnemonicPicture(card.glyph);
+    const picture = cue.customShape ? '' : art;
+    const original = MNEMONICS[card.glyph];
+    const builtIn = cue.customShape ? `<details class="built-in-picture"><summary>See built-in illustration</summary>
+      <div class="memory-scene">${art}<div><h3>${esc(original.letterAnchor)}</h3><p>${esc(original.letterCue)}</p></div></div></details>` : '';
     const explanation = cue.letterCue ? `<p>${esc(cue.letterCue)}</p>` : '';
     const editButton = editable ? `<button type="button" class="cue-edit" data-edit-cue="${card.glyph}">${icon('edit',14)}Edit mnemonic</button>` : '';
     if (hint) {
-      return `<details class="memory-hint"><summary>Show a letter-shape hint</summary><div class="memory-scene">${picture}<div><h3>${esc(cue.letterAnchor)}</h3>${explanation}</div></div></details>`;
+      return `<details class="memory-hint"><summary>Show a letter-shape hint</summary><div class="memory-scene">${picture}<div><h3>${esc(cue.letterAnchor)}</h3>${explanation}</div></div>${builtIn}</details>`;
     }
     return `<section class="memory-cue letter-memory"><span class="kicker">${icon('star', 13)} ${cue.personal?'My mnemonic':'Letter mnemonic'}</span>
-      <div class="memory-scene">${picture}<div><h3>${esc(cue.letterAnchor)}</h3>${explanation}<p class="sound-link"><strong>Sound link</strong> ${esc(cue.soundLink)}</p></div></div>${editButton}</section>`;
+      <div class="memory-scene">${picture}<div><h3>${esc(cue.letterAnchor)}</h3>${explanation}<p class="sound-link"><strong>Sound link</strong> ${esc(cue.soundLink)}</p></div></div>${builtIn}${editButton}</section>`;
   }
 
   function wordMnemonic(card) {

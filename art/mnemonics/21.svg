@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="152" viewBox="0 0 220 152">
+<rect width="220" height="152" rx="9" fill="#f5e7c7"/>
+<ellipse cx="124" cy="133" rx="64" ry="4" fill="#daca9f" opacity=".6"/>
+<!-- A briar bowl rests in the lower open curve; the stem sweeps out and up. -->
+<path d="M134 105q19 0 31-9 11-9 19-10l8 4q-10 1-20 13-11 12-30 14z" fill="#ab8050" stroke="#695b42" stroke-width="2.3" stroke-linejoin="round"/>
+<path d="M168 98q11-12 20-12l5 3-1 3q-8 0-18 12z" fill="#465547"/>
+<path d="M83 103q1-6 10-7l35-7q15-3 21 0 7 6 5 17-4 19-28 22-32 4-42-14z" fill="#c58d58" stroke="#886847" stroke-width="2"/>
+<path d="M92 106q10 7 35-1m-32 7q8 5 18 3" fill="none" stroke="#dda970" stroke-width="2.1" stroke-linecap="round"/>
+<path d="M83 102q11-7 31-11 20-4 28-2l5 3q-11 7-29 10-22 4-34 3z" fill="#8d6846" stroke="#755b42" stroke-width="2"/>
+<path d="M87 100q18-8 33-9" fill="none" stroke="#e6bc80" stroke-width="2.5" stroke-linecap="round"/>
+<!-- Soft smoke depth is visible just behind the original outline. -->
+<path d="M66 68q-10-26 7-42 18-17 33-5 7 5 9 11 9-12 21-10 14 2 18 15" fill="none" stroke="#adb9a2" stroke-width="7" stroke-linecap="round"/>
+<path fill="#283d34" d="M61 56.3Q61 22.5 88.8 22.5Q106.1 22.5 112.3 35.7Q120.3 22.8 132.9 22.8Q159.1 22.8 159 51.5Q159 68.2 142.3 79.1Q157.2 86.2 157.2 96.3V102.5Q157.1 114.5 147.2 122Q137.3 129.5 118.8 129.5Q99.7 129.5 90.3 123.2Q81 117 81 109V107.1Q81 105 84.3 102.8Q87.6 100.5 90.9 102.8Q94.3 105.1 94.3 107.1V109Q94.3 112.5 99.4 116.3Q104.5 120.2 118.8 120.2Q134.5 120.2 139.8 115Q145.1 109.9 145.1 102.5V96.6Q145.1 85.4 132.9 85.4H127.6V75.4H129.4Q134.9 75.4 141.1 69.3Q147.3 63.3 147.1 52.9Q147.1 32.2 132.9 32.2Q122.3 32.2 115.8 43.8Q116.5 47.8 116.8 50.9Q117.2 53.9 117.2 56.2Q117.2 88.8 89.2 88.8Q61 88.8 61 56.3ZM105.2 56.5Q105.2 31.8 88.8 31.8Q73 31.8 73 56.3Q73 79.4 88.8 79.4Q105.2 79.4 105.2 56.5Z"/>
+<path d="M91 28q-11 1-17 11m38 45q-6 3-8 11m14-10q-2 4-2 7" fill="none" stroke="#a5b29d" stroke-width="2.3" stroke-linecap="round"/>
+<path d="M144 96q1 10-6 16" fill="none" stroke="#e0af73" stroke-width="1.7" stroke-linecap="round"/>
+</svg>

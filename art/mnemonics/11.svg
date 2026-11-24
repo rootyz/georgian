@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 152">
+  <rect width="220" height="152" rx="9" fill="#f5e7c7"/>
+  <g>
+<ellipse cx="111" cy="130" rx="56" ry="3" fill="#decda7"/>
+    <path d="M53 59c0-17 9-32 23-32q12 0 18 12 5-14 16-14t18 14q9-14 18-13c17 0 26 13 25 29q0 17-15 33-13 13-37 10-31-5-48-14-12-6-18-25z" fill="#e6cd93" stroke="#b4915b" stroke-width="1.6"/>
+    <g fill="#f5e7c7" stroke="#c5a36c" stroke-width="1.15">
+      <ellipse cx="76" cy="48" rx="5" ry="7"/><ellipse cx="110" cy="48" rx="5" ry="7"/><ellipse cx="145" cy="48" rx="5" ry="7"/>
+      <ellipse cx="80" cy="71" rx="4" ry="2.6"/><ellipse cx="110" cy="76" rx="4" ry="2.8"/><ellipse cx="140" cy="74" rx="4" ry="2.6"/>
+    </g>
+    <path d="M60 41q-5-6 0-8 2-1 5 2m4-5q-1-7 4-7 3 0 4 5m24 2q-1-6 3-7 3-1 5 4m28 3q0-6 4-7 3 0 5 5m13 7q5-5 7-1 1 2-2 6" fill="none" stroke="#be9960" stroke-width="2" stroke-linecap="round"/>
+    <path d="M62 62c2-21 7-28 16-28q11 0 13 18m9-4q2-14 10-14c8 0 12 7 13 18m10-1c1-10 6-17 14-17 9 0 14 9 15 19" fill="none" stroke="#f9efce" stroke-width="4.8" stroke-linecap="round"/>
+    <path d="M60 55l17 19 18-23 17 23 17-23 17 23 18-22M64 76l12-20 18 23 18-23 17 23 16-23 12 16" fill="none" stroke="#b18a57" stroke-width="2.7" stroke-linejoin="round"/>
+    <path d="M62 55l15 17 18-23 17 23 17-23 17 23 17-21M64 74l12-20 18 23 18-23 17 23 16-23 12 16" fill="none" stroke="#fff3d4" stroke-width="2.8" stroke-linejoin="round"/>
+    <path d="M63 76q36 18 82 14l11-7-1 8q-37 19-85-6z" fill="#e1ba7d" stroke="#b2905d" stroke-width="1.3"/>
+    <path d="M67 80q38 17 80 12" fill="none" stroke="#fff2cf" stroke-width="2.4" stroke-dasharray="3 4" stroke-linecap="round"/>
+    <path d="M132 117q9 5 18 4l2 7-16 1-9-6zm-64-14q-6 5-15 4l1 9q10 3 17-2z" fill="#dcbb80" stroke="#a98d5e" stroke-width="1.4"/>
+    <path fill="#283d34" d="M168.5 55.1Q168.4 69.1 156.7 84.9H144Q157.9 69.6 157.9 55.1Q157.9 37.5 145 37.5Q132.2 37.5 132.1 53L131.4 66.3H122.5L121.8 53Q121.8 37.2 109.9 37.2Q98.2 37.2 98.2 53L97.7 66.3H88.8L88.2 53Q88.2 37.5 75.1 37.5Q62.1 37.5 62.1 58.1Q62.1 84.7 108 97.9Q133.6 104 137.6 123.3H127.3Q124.4 109.7 98.1 104.7Q78.2 106.5 70.4 115.5L64 107.9Q71.7 101.3 85.2 99Q51.5 85.5 51.5 57.8Q51.5 29.3 75.1 29.3Q87.7 29.3 93.1 41.3Q98.8 28.7 109.9 28.7Q122 28.7 127.2 41.5Q132.8 29.3 144.9 29.3Q168.5 29.3 168.5 55.1Z"/>
+<path d="M59 52q3-13 10-17m29 5 4-4m33 1 6-3m-74 55 8 4m24 7 8 2m19 10 4 4" fill="none" stroke="#e3d5ab" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 3"/>
+  </g>
+</svg>

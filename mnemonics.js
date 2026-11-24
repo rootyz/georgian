@@ -234,37 +234,9 @@ globalThis.MNEMONICS = {
   }
 };
 
-// Letter outlines are from the bundled Georgian font, with its license in fonts/LICENSE.txt.
-const mnemonicGlyphPaths = {
-  "თ": "M100 523Q100 1120 520 1120Q765 1120 869 932Q995 1115 1141 1115Q1540 1115 1540 583Q1538 263 1309 -19H1085Q1360 258 1360 578Q1362 976 1130 976Q1029 976 918 790Q941 716 941 527Q913 -29 516 -29Q100 -29 100 523ZM760 523Q760 981 518 981Q280 981 280 523Q280 111 516 111Q760 111 760 523Z",
-  "ა": "M940 426Q940 -30 519 -30Q100 -30 100 436L138 643H314L280 436Q280 110 522 110Q761 110 761 426Q760 638 565 819Q370 1001 370 1213H557Q558 1049 749 868Q940 687 940 426Z",
-  "ე": "M920 -63Q920 -483 524 -483Q100 -483 100 -61L133 164H305L280 -63Q280 -343 524 -343Q750 -343 750 -65V722Q750 980 525 980Q325 980 325 736L380 510H208L159 730Q159 1120 525 1120Q920 1120 920 719Z",
-  "ი": "M960 580Q960 312 817 1H634Q780 289 780 580Q780 980 530 980Q280 980 280 577Q280 289 425 0H241Q100 312 100 583Q100 1120 530 1120Q960 1120 960 580Z",
-};
-
-function mnemonicOutline(glyph, transform) {
-  return `<path fill="#283d34" transform="${transform}" d="${mnemonicGlyphPaths[glyph]}"/>`;
-}
-
-const mnemonicIllustrations = {
-  "თ": () => `
-  <ellipse cx="105" cy="129" rx="67" ry="4" fill="#daca9f" opacity=".6"/>
-  <path transform="translate(50 116) scale(.079 -.079)" d="${mnemonicGlyphPaths["თ"]}" fill="#e1af63" stroke="#ad8950" stroke-width="15"/>
-  <path d="M125 124.5l17.5.1 11.6-7.1-17.7-.1z" fill="#d29950"/>
-  <ellipse cx="79" cy="80" rx="26" ry="41" fill="#e6bd74"/>
-  <ellipse cx="79" cy="80" rx="17" ry="29" fill="none" stroke="#cc9e5b" stroke-width="1.1"/>
-  <ellipse cx="79" cy="80" rx="12" ry="23" fill="#f5e7c7" stroke="#956f46" stroke-width="1.7"/>
-  <path d="M77 58q-12 24-1 43" fill="none" stroke="#c9a77a" stroke-width="2.7" stroke-linecap="round"/>
-  ${mnemonicOutline("თ","translate(38 123) scale(.079 -.079)")}
-  <path d="M159 108l5 2m-8 3 5 2m-8 2 5 2" fill="none" stroke="#b48b51" stroke-width="1.3" stroke-linecap="round"/>
-`,
-  "ა": () => `<path d="M110 0v21q0 7 7 9" fill="none" stroke="#a47c47" stroke-width="3"/>${mnemonicOutline("ა","translate(70 131) scale(.084 -.084)")}<path d="M66 74q-7 2-11 8m9-17-13 1" fill="none" stroke="#d9974a" stroke-width="3" stroke-linecap="round"/>`,
-  "ე": () => `${mnemonicOutline("ე","translate(68 96) scale(.078 -.078)")}<path d="M106 47q22-18 27 4t-13 33q-11 6-10 18" fill="none" stroke="#bb8263" stroke-width="3" stroke-linecap="round"/><path d="M65 59q-9 14 0 28m-8-33q-14 19-2 38" fill="none" stroke="#ccba88" stroke-width="2"/>`,
-  "ი": () => `<path d="M0 111Q50 99 94 111T220 109v43H0Z" fill="#b6d5c4"/><circle cx="164" cy="42" r="11" fill="#ebbd5e"/><path d="M83 126V78q0-46 28-46t29 46v48Z" fill="#dfa46a"/><path d="M100 61h7v9h-7zm17-2h7v9h-7zm-17 20h7v9h-7zm17-1h7v9h-7zm-8 24h9v24h-9z" fill="#836e50"/>${mnemonicOutline("ი","translate(68 124) scale(.083 -.083)")}<path d="M2 136q45-11 82-5t81 0 55 0v21H0Z" fill="#aebc87"/>`
-};
-
-// The card already presents the same scene in text, so the picture is decorative to a screen reader.
+// The modern Mkhedruli letters occupy consecutive code points starting at U+10D0.
 globalThis.mnemonicPicture = function mnemonicPicture(glyph) {
-  if (!Object.hasOwn(mnemonicIllustrations, glyph)) return "";
-  return `<svg class="mnemonic-picture" viewBox="0 0 220 152" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect width="220" height="152" rx="9" fill="#f5e7c7"/>${mnemonicIllustrations[glyph]()}</svg>`;
+  if (!Object.hasOwn(MNEMONICS, glyph)) return '';
+  const file = String(glyph.codePointAt(0) - 0x10D0 + 1).padStart(2, '0');
+  return `<img class="mnemonic-picture" src="./art/mnemonics/${file}.svg" width="220" height="152" alt="">`;
 };

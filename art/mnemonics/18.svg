@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="152" viewBox="0 0 220 152">
+<rect width="220" height="152" rx="9" fill="#f5e7c7"/>
+<ellipse cx="111" cy="132" rx="50" ry="4.2" fill="#daca9f" opacity=".65"/>
+<!-- Warm belly follows the raised left side, then the bend of the tail. -->
+<path d="M76 28q1-10 9-10l12 7q-7 5-8 15v55q0 27 22 30 21-1 21-26 1-10-7-24-9-15-5-26l2-6 2 10q-2 13 6 23 11 13 10 27-1 28-27 30-34-1-35-35z" fill="#acb878" stroke="#7b8a60" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M81 43v51q0 25 10 31" fill="none" stroke="#e4c37b" stroke-width="5" stroke-linecap="round"/>
+<path d="M78 50l5 2m-5 8 5 2m-4 9 4 1m-4 9 4 1m-4 9 4 1m-3 9 5 1" stroke="#9b925e" stroke-width="1.8" stroke-linecap="round"/>
+<path fill="#283d34" d="M136.1 97.7Q136.1 129.5 110.6 129.5Q83.9 129.5 83.9 96.7V22.5H94.5V96.7Q94.5 120.8 110.6 120.8Q124.9 120.8 124.9 97.7Q125 87.2 118.8 78.7Q112.5 70.3 112.5 62.4L112.9 51.9H124.2L122.5 62Q122.5 67.8 129.3 77.4Q136.1 86.9 136.1 97.7Z"/>
+<path d="M77 27q-1-10 8-14 8-4 17 1 8 4 10 9l-6 3-11 1-6 7q-7 1-12-7z" fill="#8fa777" stroke="#475d47" stroke-width="2.7" stroke-linejoin="round"/>
+<path d="M93 26l12-2 6-2" fill="none" stroke="#586c48" stroke-width="1.8" stroke-linecap="round"/>
+<ellipse cx="97" cy="18.5" rx="4.2" ry="3.8" fill="#edc77e"/><path d="M98 16l-.7 4.5" stroke="#303e34" stroke-width="2.1" stroke-linecap="round"/>
+<circle cx="108" cy="21" r="1.2" fill="#4e5e49"/>
+<path d="M110 23q8-1 13 2m-4-2 4-2" fill="none" stroke="#a65f46" stroke-width="1.9" stroke-linecap="round"/>
+<path d="M136 113l-2-3m-2 11-2-3m-6 8-2-3" stroke="#c7cd99" stroke-width="1.9" stroke-linecap="round"/>
+</svg>

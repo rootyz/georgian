@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="152" viewBox="0 0 220 152">
+<rect width="220" height="152" rx="9" fill="#f5e7c7"/>
+<ellipse cx="105" cy="134" rx="66" ry="4" fill="#daca9f" opacity=".65"/>
+<!-- Cross-braced timber supports give the two interior arches a common foundation. -->
+<g fill="none" stroke-linejoin="round">
+<path d="M60 130h104" stroke="#9f7b4e" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M77 84v45m15-65v66m17-42v42m21-66v66m17-48v47" stroke="#b58c51" stroke-width="4"/>
+<path d="M77 99l15 15-15 15m15-36 17 16-17 19m17-33 21 16-21 18m21-35 17 16-17 17" stroke="#c99d60" stroke-width="2.1"/>
+<path d="M70 82q10-33 26-48 10-10 25-13" stroke="#d7a05a" stroke-width="3.5" stroke-linecap="round"/>
+</g>
+<path fill="#283d34" d="M154.9 92.7Q154.9 111 136.9 129.4H122.6Q143.6 112.9 143.6 92.7Q143.4 68 129.1 68Q115.2 68 115.2 90.2V102.5H104.7V90.2Q104.8 68 91 68Q76.4 68 76.4 92.7Q76.4 112.9 97.5 129.5H82.6Q65.1 110.7 65.1 92.7Q65.1 67.7 81.1 47.1Q97 26.5 123.6 22.5V33Q98.9 34.4 79.1 61.5V64L90.5 59.2Q104.1 59.2 109.8 75.1Q115.8 59.2 129.6 59.2Q154.9 59.2 154.9 92.7Z"/>
+<g transform="translate(110,29) rotate(-24)">
+<path d="M-11-10h5l2 3h8l2-4h5l-2 11h-18z" fill="#d9a25f" stroke="#6d5945" stroke-width="2.1" stroke-linejoin="round"/>
+<circle cx="-6" cy="1" r="3.1" fill="#38443a"/><circle cx="6" cy="1" r="3.1" fill="#38443a"/>
+<circle cx="0" cy="-13" r="3.5" fill="#99794f"/><path d="M0-10l1 3 6-2" fill="none" stroke="#a16b50" stroke-width="3" stroke-linecap="round"/>
+</g>
+<g transform="translate(89,46) rotate(-43)">
+<path d="M-14-12h6l2 3h9l3-5h6l-2 13h-23z" fill="#bf7555" stroke="#6d5945" stroke-width="2.3" stroke-linejoin="round"/>
+<path d="M-12-4h21" stroke="#e9b06f" stroke-width="3" stroke-linecap="round"/>
+<circle cx="-8" cy="1" r="3.5" fill="#38443a"/><circle cx="6" cy="1" r="3.5" fill="#38443a"/>
+<circle cx="-5" cy="-15" r="3.7" fill="#a27851"/><path d="M-5-11l2 4 5-.5" fill="none" stroke="#6c866d" stroke-width="3.5" stroke-linecap="round"/>
+</g>
+</svg>

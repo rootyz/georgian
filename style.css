@@ -2790,3 +2790,7 @@ dialog details a {
 .spell-answer { display: grid; gap: .2rem; margin: .8rem auto }
 .spell-answer b { font-size: clamp(1.65rem, 6vw, 2.65rem); font-weight: 450; word-break: break-word }
 .spell-answer span { color: var(--muted) }
+
+.built-in-picture { margin-top: .65rem; }
+.built-in-picture > summary { cursor: pointer; font-weight: 600; font-size: .9rem; }
+.built-in-picture[open] > summary { margin-bottom: .5rem; }
